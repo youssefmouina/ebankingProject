@@ -1,0 +1,37 @@
+.detail-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.custom-select {
+  padding-right: 2.5rem !important; /* more space for arrow */
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.65em auto;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.detail-card:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+
+.detail-card h4 {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.form-select {
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 360px;
+}

@@ -1,0 +1,213 @@
+:host {
+  --primary-color: #004080;
+  --secondary-color: #002b5c;
+  --text-light: #fff;
+  --background-light: #f5f7fa;
+  --footer-bg: #343a40;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* -------- HEADER -------- */
+.app-header {
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+}
+
+.navbar {
+  padding: 0;
+}
+
+.navbar-brand img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* -------- NAV LINKS -------- */
+.navbar-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 50px;
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-light);
+  font-weight: 500;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffdd57; /* Highlight color */
+  text-decoration: none;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background-color: #ffdd57;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* -------- LANG SELECTOR -------- */
+select.form-select {
+  appearance: none;
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.375rem 2rem 0.375rem 0.75rem;
+  font-weight: 500;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpolygon fill='%23004080' points='0,0 20,0 10,10'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px;
+  margin-left: 1rem;
+  min-width: 80px;
+}
+
+select.form-select:hover {
+  background-color: #f0f0f0;
+}
+
+select.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* -------- MAIN CONTENT -------- */
+.app-main {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: var(--background-light);
+}
+
+/* -------- FOOTER -------- */
+.app-footer {
+  background-color: var(--footer-bg);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0;
+  }
+
+  select.form-select {
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+
+  .navbar-nav .dropdown-toggle span {
+    display: none !important;
+  }
+}
+
+:host {
+  --primary-color: #004080;
+  --text-light: #fff;
+  --background-light: #f5f7fa;
+}
+
+/* --- NAVBAR DROPDOWN PROFILE --- */
+.navbar-nav .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-nav .dropdown-toggle::after {
+  margin-left: 0.5rem;
+}
+
+/* Icône du profil */
+.navbar-nav .dropdown-toggle i {
+  font-size: 1.2rem;
+}
+
+/* Username à droite de l'icône */
+.navbar-nav .dropdown-toggle span.d-none.d-md-inline {
+  font-weight: 500;
+}
+
+/* Container général */
+.navbar-nav.ms-3 {
+  margin-left: 1rem !important;
+}
+
+/* Ensure the parent dropdown item is a positioning context */
+.navbar-nav .nav-item.dropdown {
+  position: relative;
+}
+
+/* MENU hidden by default and positioned absolutely */
+.navbar-nav .nav-item.dropdown .dropdown-menu {
+  display: block; /* Use display block but control visibility */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute;
+  top: 100%; /* Position right below the toggle */
+  right: 0; /* Align to the right */
+  z-index: 1000;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0;
+  min-width: 180px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Show the menu on hover of the parent dropdown item */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  right: -50px; /* Move the dropdown further to the right */
+}
+
+/* Items */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-item i {
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* Danger item */
+.dropdown-item.text-danger:hover {
+  background-color: #dc3545;
+  color: var(--text-light) !important;
+}

@@ -1,0 +1,61 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'transferModal.title' | translate }}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="virementForm" (ngSubmit)="submitTransfer()">
+          <!-- Émetteur -->
+          <div class="mb-3">
+            <label for="emetteur" class="form-label">{{ 'transferModal.senderRIB' | translate }}</label>
+            <input type="text" id="emetteur" class="form-control" formControlName="compteEmetteur">
+            <div class="text-danger" *ngIf="emetteur.invalid && emetteur.dirty">
+              {{ 'transferModal.senderRIBError' | translate }}
+            </div>
+          </div>
+
+          <!-- Récepteur -->
+          <div class="mb-3">
+            <label for="rib" class="form-label">{{ 'transferModal.receiverRIB' | translate }}</label>
+            <input type="text" id="rib" class="form-control" formControlName="compteRecepteur">
+            <div class="text-danger" *ngIf="rib.invalid && rib.dirty">
+              {{ 'transferModal.receiverRIBError' | translate }}
+            </div>
+          </div>
+
+          <!-- Montant -->
+          <div class="mb-3">
+            <label for="montant" class="form-label">{{ 'transferModal.amount' | translate }}</label>
+            <input type="number" id="montant" class="form-control" formControlName="montant">
+            <div class="text-danger" *ngIf="montant.invalid && montant.dirty">
+              {{ 'transferModal.amountError' | translate }}
+            </div>
+          </div>
+
+          <!-- Type -->
+          <div class="mb-3">
+            <label for="type" class="form-label">{{ 'transferModal.type' | translate }}</label>
+            <select id="type" class="form-select" formControlName="type">
+              <option value="NORMAL">{{ 'transferModal.normal' | translate }}</option>
+              <option value="INSTANTANEE">{{ 'transferModal.instant' | translate }}</option>
+            </select>
+          </div>
+
+          <div class="text-danger mb-2" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" (click)="closeModal()">
+              {{ 'transferModal.cancel' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="virementForm.invalid">
+              {{ 'transferModal.confirm' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

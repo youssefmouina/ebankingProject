@@ -1,0 +1,82 @@
+<div class="invoice-container">
+
+  <!-- Eau & Électricité -->
+  <div class="invoice-section">
+    <h2 class="section-title">{{ 'PAYMENT.EAU_ELECTRICITE' | translate }}</h2>
+    <div class="image-grid">
+      <ng-container *ngFor="let entry of eauElectricite | keyvalue">
+        <div class="image-container">
+          <img
+            [src]="entry.key"
+            [alt]="entry.value"
+            class="invoice-image"
+          />
+          <div class="overlay">
+            <button
+              class="pay-button"
+              (click)="openModal(entry.value)"
+            >
+              {{ 'PAYMENT.PAY' | translate:{ provider: entry.value } }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Taxes -->
+  <div class="invoice-section">
+    <h2 class="section-title">{{ 'PAYMENT.TAXES' | translate }}</h2>
+    <div class="image-grid">
+      <ng-container *ngFor="let entry of taxes | keyvalue">
+        <div class="image-container">
+          <img
+            [src]="entry.key"
+            [alt]="entry.value"
+            class="invoice-image"
+          />
+          <div class="overlay">
+            <button
+              class="pay-button"
+              (click)="openModal(entry.value)"
+            >
+              {{ 'PAYMENT.PAY' | translate:{ provider: entry.value } }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Internet & Téléphonie -->
+  <div class="invoice-section">
+    <h2 class="section-title">{{ 'PAYMENT.INTERNET' | translate }}</h2>
+    <div class="image-grid">
+      <ng-container *ngFor="let entry of internet | keyvalue">
+        <div class="image-container">
+          <img
+            [src]="entry.key"
+            [alt]="entry.value"
+            class="invoice-image"
+          />
+          <div class="overlay">
+            <button
+              class="pay-button"
+              (click)="openModal(entry.value)"
+            >
+              {{ 'PAYMENT.PAY' | translate:{ provider: entry.value } }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Modal Component -->
+  <invoice-modal
+    [showModal]="showModal"
+    (close)="closeModal()"
+    [provider]="selectedName"
+  >
+  </invoice-modal>
+</div>

@@ -1,0 +1,112 @@
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeModal()">×</button>
+    <h2>{{ 'PAYMENT.MODAL_TITLE' | translate:{ provider: provider } }}</h2>
+
+    <form (ngSubmit)="searchReference()">
+      <label for="reference">{{ 'PAYMENT.REFERENCE_LABEL' | translate }}</label>
+      <input
+        [(ngModel)]="reference"
+        name="reference"
+        id="reference"
+        type="text"
+        [placeholder]="'PAYMENT.REFERENCE_PLACEHOLDER' | translate"
+      />
+      <button type="submit">{{ 'PAYMENT.SEARCH_BUTTON' | translate }}</button>
+    </form>
+
+    <form (ngSubmit)="payInvoice()"> <!--DisplayEcodeModal() ____-->
+      <div class="invoice" *ngIf="showInvoiceToPay && invoiceResDto != null">
+        <div class="invoice-details">
+          <p><strong>{{ invoiceResDto?.amount }} DH</strong></p>
+          <p>{{ 'PAYMENT.INVOICE_DUE_DATE' | translate:{ date: invoiceResDto?.dueDate } }}</p>
+        </div>
+
+        <div
+          class="comptes-courant"
+          *ngFor="let compte of CCourantActifComptes"
+          [ngClass]="{
+            'enabled-compte': compte.autorisePaiementEnLigne && compte.solde > (invoiceResDto?.amount ?? 0),
+            'selected-enabled-compte': selectedCompte === compte && compte.autorisePaiementEnLigne && compte.solde > (invoiceResDto?.amount ?? 0),
+            'disabled-compte-dotation': !compte.autorisePaiementEnLigne,
+            'disabled-compte-insuffisant-sold': (invoiceResDto?.amount ?? 0) > compte.solde
+          }"
+          (click)="onSelectCompte(compte)"
+        >
+          <p>{{ compte.id }} -----------{{ compte.autorisePaiementEnLigne }}</p>
+          <p><strong>{{ 'PAYMENT.SELECT_RIB' | translate:{ rib: compte.rib } }}</strong></p>
+          <p><strong>{{ 'PAYMENT.BALANCE' | translate:{ balance: compte.solde } }}</strong></p>
+
+          <p class="info-message" *ngIf="!compte.autorisePaiementEnLigne">
+            {{ 'PAYMENT.ENABLE_DOTATION' | translate }}
+          </p>
+          <p class="info-message" *ngIf="(invoiceResDto?.amount ?? 0) > compte.solde">
+            {{ 'PAYMENT.INSUFFICIENT_BALANCE' | translate }}
+          </p>
+        </div>
+
+        <button type="submit" [disabled]="!isPayButtonEnabled">
+          {{ 'PAYMENT.PAY_INVOICE' | translate }}
+        </button>
+      </div>
+    </form>
+
+    <div class="invoice-error" *ngIf="invoiceNotFound">
+      <p>{{ 'PAYMENT.NO_INVOICE_FOUND' | translate }}</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODALE POUR VERIFICATION DE ECODE -->
+<div *ngIf="showEcodeModal" class="ecode-modal-overlay">
+  <div class="ecode-modal-content">
+    <button class="ecode-close-button" (click)="cancel()">×</button>
+    <h3>Enter Votre E-code</h3>
+    <p>Veuillez saisir votre E-code pour valider cette opération</p>
+
+    <form (ngSubmit)="confirmInvoice()">
+      <input
+        name="verificationCode"
+        [(ngModel)]="code"
+        type="text"
+        pattern="[0-9]*"
+        maxlength="4"
+        placeholder="Enter votre E-Code"
+        required
+        (keypress)="allowOnlyNumbers($event)"
+      />
+
+      <div class="ecode-actions">
+        <button type="submit" class="validate-btn">
+          <ng-container *ngIf="!isLoadingForEcodeVeriFication; else loadingTpl">Verify</ng-container>
+          <ng-template #loadingTpl>
+            <span class="spinner-btn"></span> ...Processing
+          </ng-template>
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- Success Payment Modal -->
+<div class="success-modal-overlay" *ngIf="showSuccessModal">
+  <div class="success-modal-content">
+    <button class="success-close-button" (click)="closeSuccessModal()">×</button>
+    <h2>{{ 'PAYMENT.SUCCESS_TITLE' | translate }}</h2>
+    <p>{{ 'PAYMENT.SUCCESS_MESSAGE' | translate }}</p>
+  </div>
+</div>
+
+<!-- Failure Payment Modal -->
+<div class="failure-modal-overlay" *ngIf="showFailureModal">
+  <div class="failure-modal-content">
+    <button class="failure-close-button" (click)="closeFailureModal()">×</button>
+    <h2>{{ 'PAYMENT.FAILURE_TITLE' | translate }}</h2>
+    <p>{{ 'PAYMENT.FAILURE_MESSAGE' | translate }}</p>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="settings-container">
+    <div class="settings-tabs">
+      <button class="tab-button" [class.active]="activeTab === 'profile'" (click)="activeTab = 'profile'">
+        <i class="bi bi-person-circle me-2"></i> Profil
+      </button>
+      <button class="tab-button" [class.active]="activeTab === 'security'" (click)="activeTab = 'security'">
+        <i class="bi bi-shield-lock me-2"></i> Sécurité
+      </button>
+    </div>
+  
+    <div class="settings-content mt-4">
+      <!-- Profil Tab -->
+      <div *ngIf="activeTab === 'profile'">
+        <h5>Informations du profil</h5>
+        <!-- Ajouter ici les informations de l'utilisateur -->
+        <p>firstname : {{client?.firstName}}</p>
+        <p>lastname : {{client?.lastName}} </p>
+        <p>username : {{client?.username}}</p>
+        <p>job : {{client?.job}}</p>
+
+
+        <h5>Contact</h5>
+        <!-- Ajouter ici les informations de l'utilisateur -->
+        <p>Téléphone :  {{client?.phone}}</p>
+        <p>Email : {{client?.email}}</p>
+      </div>
+  
+      <!-- Sécurité Tab -->
+      <div *ngIf="activeTab === 'security'">
+        <h5>Paramètres de sécurité</h5>
+        <div class="security-item" (click)="editBankinoPassword()">
+            <i class="bi bi-lock-fill me-2 text-primary"></i> Mot de passe Bankino
+        </div>
+          
+        <div class="security-item" (click)="editECode()">
+            <i class="bi bi-key-fill me-2 text-success"></i>E-Code
+        </div>
+      </div>
+    </div>
+  </div>
+  <ecode-modal *ngIf="showEcodeModal" (onCancel)="closeEcodeModal()"></ecode-modal>
+  

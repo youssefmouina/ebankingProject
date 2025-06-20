@@ -1,0 +1,126 @@
+<div class="register-container">
+  <form class="register-form" (submit)="handleRegister($event)">
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" [ngClass]="'step-' + step"></div>
+      </div>
+      <div class="step-indicator">
+        <div class="step-dot" [ngClass]="{'active': step === 1, 'completed': step > 1}"></div>
+        <div class="step-dot" [ngClass]="{'active': step === 2, 'completed': step > 2}"></div>
+        <div class="step-dot" [ngClass]="{'active': step === 3, 'completed': step > 3}"></div>
+        <div class="step-dot" [ngClass]="{'active': step === 4, 'completed': step > 4}"></div>
+        <div class="step-dot" [ngClass]="{'active': step === 5, 'completed': step > 5}"></div>
+        <div class="step-dot" [ngClass]="{'active': step === 6, 'completed': step > 6}"></div>
+      </div>
+      <div class="step-labels">
+        <div class="step-label" [ngClass]="{'active': step === 1, 'completed': step > 1}">{{ 'REGISTER.STEPS.INFO' | translate }}</div>
+        <div class="step-label" [ngClass]="{'active': step === 2, 'completed': step > 2}">{{ 'REGISTER.STEPS.EMAIL' | translate }}</div>
+        <div class="step-label" [ngClass]="{'active': step === 3, 'completed': step > 3}">{{ 'REGISTER.STEPS.CONTACT' | translate }}</div>
+        <div class="step-label" [ngClass]="{'active': step === 4, 'completed': step > 4}">{{ 'REGISTER.STEPS.SMS' | translate }}</div>
+        <div class="step-label" [ngClass]="{'active': step === 5, 'completed': step > 5}">{{ 'REGISTER.STEPS.SECURITY' | translate }}</div>
+        <div class="step-label" [ngClass]="{'active': step === 6, 'completed': step > 6}">{{ 'REGISTER.STEPS.DONE' | translate }}</div>
+      </div>
+    </div>
+
+    <!-- Step 1 -->
+    <div *ngIf="step === 1" class="step-content">
+      <h2 class="step-title step-1">{{ 'REGISTER.TITLES.STEP1' | translate }}</h2>
+      <input type="text" [placeholder]="'REGISTER.PLACEHOLDERS.FIRSTNAME' | translate" [(ngModel)]="dto.firstName" name="firstName" required />
+      <input type="text" [placeholder]="'REGISTER.PLACEHOLDERS.LASTNAME' | translate" [(ngModel)]="dto.lastName" name="lastName" required />
+      <input type="email" [placeholder]="'REGISTER.PLACEHOLDERS.EMAIL' | translate" [(ngModel)]="dto.email" name="email" required />
+      <button type="button" (click)="sendEmailToken()">{{ 'REGISTER.BUTTONS.CONTINUE' | translate }}</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div *ngIf="step === 2" class="step-content">
+      <h2 class="step-title step-2">{{ 'REGISTER.TITLES.STEP2' | translate }}</h2>
+      <div *ngIf="!emailTokenSent">
+        <p class="text-center text-muted mb-3">{{ 'REGISTER.MESSAGES.EMAIL_INSTRUCTION' | translate }}</p>
+        <button type="button" (click)="sendEmailToken()">{{ 'REGISTER.BUTTONS.SEND_EMAIL_CODE' | translate }}</button>
+      </div>
+      <div *ngIf="emailTokenSent" class="token-section">
+        <div class="token-sent">{{ 'REGISTER.MESSAGES.EMAIL_CODE_SENT' | translate:{ email: dto.email } }}</div>
+        <app-verification-code
+          (codeComplete)="onEmailCodeComplete($event)"
+          (codeChanged)="onEmailCodeChanged($event)"
+          [(code)]="emailToken">
+        </app-verification-code>
+        <button type="button" class="verify" (click)="verifyEmailToken()" [disabled]="!isEmailCodeValid">
+          {{ 'REGISTER.BUTTONS.VERIFY_EMAIL' | translate }}
+        </button>
+      </div>
+      <div class="nav-buttons">
+        <button type="button" class="back" (click)="step = 1">{{ 'REGISTER.BUTTONS.BACK' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div *ngIf="step === 3" class="step-content">
+      <h2 class="step-title step-3">{{ 'REGISTER.TITLES.STEP3' | translate }}</h2>
+      <input type="text" [placeholder]="'REGISTER.PLACEHOLDERS.USERNAME' | translate" [(ngModel)]="dto.username" name="username" required />
+      <input type="tel" [placeholder]="'REGISTER.PLACEHOLDERS.PHONE' | translate" [(ngModel)]="dto.phone" name="phone" required />
+      <button type="button" (click)="sendPhoneToken()">{{ 'REGISTER.BUTTONS.CONTINUE' | translate }}</button>
+      <div class="nav-buttons">
+        <button type="button" class="back" (click)="handleRetourStep2()">{{ 'REGISTER.BUTTONS.BACK' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div *ngIf="step === 4" class="step-content">
+      <h2 class="step-title step-4">{{ 'REGISTER.TITLES.STEP4' | translate }}</h2>
+      <!-- Remark for temporary SMS code -->
+      <p class="text-muted info-note">
+        {{ 'REGISTER.MESSAGES.PASSWORD_NOTE' | translate }}
+      </p>
+      <div *ngIf="!phoneTokenSent">
+        <p class="text-center text-muted mb-3">{{ 'REGISTER.MESSAGES.SMS_INSTRUCTION' | translate:{ phone: dto.phone } }}</p>
+        <button type="button" (click)="sendPhoneToken()">{{ 'REGISTER.BUTTONS.SEND_SMS_CODE' | translate }}</button>
+      </div>
+      <div *ngIf="phoneTokenSent" class="token-section">
+        <div class="token-sent">{{ 'REGISTER.MESSAGES.SMS_CODE_SENT' | translate:{ phone: dto.phone } }}</div>
+        <app-verification-code
+          (codeComplete)="onPhoneCodeComplete($event)"
+          (codeChanged)="onPhoneCodeChanged($event)"
+          [(code)]="phoneToken">
+        </app-verification-code>
+        <button type="button" class="verify" (click)="verifyPhoneToken()" [disabled]="!isPhoneCodeValid">
+          {{ 'REGISTER.BUTTONS.VERIFY_SMS' | translate }}
+        </button>
+      </div>
+      <div class="nav-buttons">
+        <button type="button" class="back" (click)="step = 3">{{ 'REGISTER.BUTTONS.BACK' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div *ngIf="step === 5" class="step-content">
+      <h2 class="step-title step-5">{{ 'REGISTER.TITLES.STEP5' | translate }}</h2>
+      <div class="optional-field">
+        <input type="text" [placeholder]="'REGISTER.PLACEHOLDERS.JOB' | translate" [(ngModel)]="dto.job" name="job" />
+      </div>
+      <input type="password" [placeholder]="'REGISTER.PLACEHOLDERS.PASSWORD' | translate" [(ngModel)]="dto.password" name="password" required />
+      <button type="button" (click)="continueToLastStep()">{{ 'REGISTER.BUTTONS.CONTINUE' | translate }}</button>
+      <div class="nav-buttons">
+        <button type="button" class="back" (click)="step = 4">{{ 'REGISTER.BUTTONS.BACK' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div *ngIf="step === 6" class="step-content">
+      <h2 class="step-title step-6">{{ 'REGISTER.TITLES.STEP6' | translate }}</h2>
+      <div class="step-complete">{{ 'REGISTER.MESSAGES.ALL_DONE' | translate }}</div>
+      <p class="text-center text-muted mb-3">{{ 'REGISTER.MESSAGES.FINAL_PROMPT' | translate }}</p>
+      <button type="submit">{{ 'REGISTER.BUTTONS.SUBMIT' | translate }}</button>
+      <div class="nav-buttons">
+        <button type="button" class="back" (click)="step = 5">{{ 'REGISTER.BUTTONS.BACK' | translate }}</button>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <a type="button" class="link-button" (click)="goBackToLogin()">
+      {{ 'REGISTER.BUTTONS.LOGIN' | translate }}
+    </a>
+  </form>
+</div>

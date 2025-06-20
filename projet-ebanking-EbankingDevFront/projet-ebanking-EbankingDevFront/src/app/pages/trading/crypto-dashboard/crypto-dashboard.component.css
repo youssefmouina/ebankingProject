@@ -1,0 +1,256 @@
+/* Container header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #0d6efd;
+  margin: 0;
+}
+
+/* Section heading */
+h2 {
+  text-align: center;
+  margin: 30px 0 20px;
+  color: #343a40;
+  font-weight: 600;
+}
+
+/* Crypto rows */
+.crypto-row {
+
+
+            justify-content: flex-end; /* Changed from center to flex-end */
+            /* Added right padding */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 120px;
+
+  display: flex;
+  gap: 20px;
+  z-index: 1;
+
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  align-items: stretch; /* Forcer les cartes à avoir la même hauteur */
+}
+
+/* Card base */
+.crypto-card {
+  position: absolute;
+  top:200px;
+  opacity: 50%;
+
+  flex: 1 1 45%;
+  width: 302px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  display: flex; /* Utiliser flex pour gérer le contenu interne */
+  flex-direction: column; /* Empiler les éléments verticalement */
+  justify-content: space-between; /* Répartir l'espace pour uniformité */
+
+}
+
+.crypto-card:hover {
+  opacity: 1;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styling */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: linear-gradient(45deg, #007bff, #0056b3, #0dcaf0);
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  font-size: 1.25rem;
+  animation: gradientShift 6s ease infinite;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-size: 300% 300%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Crypto logo */
+.crypto-logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* Conteneur pour les paragraphes (données) */
+.card-content {
+  flex-grow: 1; /* Permet au contenu de s'étendre pour occuper l'espace disponible */
+  padding: 10px 0;
+}
+
+/* Paragraphs inside card */
+.crypto-card p {
+  margin: 6px 20px;
+  color: #343a40;
+  font-size: 0.95rem;
+}
+
+/* Price change coloring */
+.positive {
+  color: #198754; /* Green */
+  font-weight: bold;
+}
+
+.negative {
+  color: #dc3545; /* Red */
+  font-weight: bold;
+}
+
+/* Action section */
+.card-actions {
+  display: flex;
+  flex-direction: column; /* Empiler les éléments verticalement */
+  align-items: stretch; /* Étirer les éléments pour qu'ils prennent toute la largeur */
+  gap: 12px; /* Espacement entre les éléments */
+  margin: 15px 20px; /* Ajuster les marges pour une meilleure intégration */
+  padding: 10px 0; /* Ajouter un padding vertical pour l'esthétique */
+}
+
+/* Input field */
+.quantity-input {
+  padding: 8px 12px; /* Ajuster le padding pour une meilleure apparence */
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.quantity-input:focus {
+  border-color: #0d6efd; /* Ajouter une bordure bleue au focus */
+  outline: none;
+}
+
+/* RIB input field */
+.rib-input {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.rib-input:focus {
+  border-color: #0d6efd;
+  outline: none;
+}
+
+/* Groupe de boutons */
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center; /* Centrer les boutons horizontalement */
+}
+
+/* Buttons */
+.buy-btn,
+.sell-btn {
+  padding: 8px 20px; /* Ajuster le padding pour des boutons plus équilibrés */
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+  min-width: 100px; /* Assurer une largeur minimale pour l'alignement */
+}
+
+.buy-btn {
+  background-color: #198754;
+  color: white;
+}
+
+.buy-btn:hover {
+  background-color: #157347;
+  transform: scale(1.03);
+}
+
+.sell-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.sell-btn:hover {
+  background-color: #bb2d3b;
+  transform: scale(1.03);
+}
+
+/* Responsive tweaks */
+@media(min-width:767px){
+  .crypto-card {
+    top: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .crypto-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .crypto-card {
+    flex: 1 1 90%;
+  }
+
+  .card-header {
+    font-size: 1.1rem;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .crypto-logo {
+    width: 35px;
+    height: 35px;
+  }
+
+  .card-actions {
+    flex-direction: column; /* Empiler les éléments sur mobile */
+    gap: 10px;
+    margin: 15px 20px;
+  }
+.card-container {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Ajout important : assurer que crypto-card occupe 100% de la hauteur disponible */
+.crypto-card {
+  height: 100%;
+}
+
+  .quantity-input,
+  .rib-input,
+  .buy-btn,
+  .sell-btn {
+    width: 100%; /* Prendre toute la largeur sur mobile */
+    box-sizing: border-box;
+  }
+}

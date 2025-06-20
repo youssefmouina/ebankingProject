@@ -1,0 +1,17 @@
+
+
+    <div class="top-button-set">
+        <button class="too-button"(click)="Btc()">Btc</button>
+        <button class="too-button" (click)="Eth()">Eth</button>
+    </div>
+   
+
+    <app-tradingview-widget 
+    
+    *ngIf="btcclick" >
+</app-tradingview-widget>
+
+<app-tradingeth *ngIf="ethclick"></app-tradingeth>
+ <div class="set"><app-crypto-dashboard [valueboolean]="btcclick" ></app-crypto-dashboard>
+ </div>
+    

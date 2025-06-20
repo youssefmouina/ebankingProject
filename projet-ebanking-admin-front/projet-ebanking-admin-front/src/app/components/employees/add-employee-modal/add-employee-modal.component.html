@@ -1,0 +1,134 @@
+<div class="modal-backdrop fade show"></div>
+<div class="modal d-block" tabindex="-1" role="dialog" aria-modal="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content shadow-lg rounded-4">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'addEmp.ADD_ADMIN' | translate }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          [attr.aria-label]="'addEmp.CLOSE' | translate"
+          (click)="closeModal()"
+        ></button>
+      </div>
+
+      <form #employeeForm="ngForm" (ngSubmit)="submit()" novalidate>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="lastName" class="form-label">{{ 'addEmp.LAST_NAME' | translate }}</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="form-control"
+              [(ngModel)]="employee.lastName"
+              required
+              #lastName="ngModel"
+            />
+            <div class="invalid-feedback d-block" *ngIf="lastName.invalid && lastName.touched">
+              {{ 'addEmp.LAST_NAME_REQUIRED' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="firstName" class="form-label">{{ 'addEmp.FIRST_NAME' | translate }}</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="form-control"
+              [(ngModel)]="employee.firstName"
+              required
+              #firstName="ngModel"
+            />
+            <div class="invalid-feedback d-block" *ngIf="firstName.invalid && firstName.touched">
+              {{ 'addEmp.FIRST_NAME_REQUIRED' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">{{ 'addEmp.EMAIL' | translate }}</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              [(ngModel)]="employee.email"
+              required
+              email
+              #email="ngModel"
+            />
+            <div class="invalid-feedback d-block" *ngIf="email.invalid && email.touched">
+              {{ 'addEmp.EMAIL_VALID' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">{{ 'addEmp.PASSWORD' | translate }}</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              [(ngModel)]="employee.password"
+              required
+              minlength="6"
+              #password="ngModel"
+            />
+            <div class="invalid-feedback d-block" *ngIf="password.invalid && password.touched">
+              {{ 'addEmp.PASSWORD_REQUIRED' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">{{ 'addEmp.PHONE' | translate }}</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-control"
+              [(ngModel)]="employee.phone"
+              required
+              pattern="^\+?[0-9\s]{8,14}$"
+              #phone="ngModel"
+            />
+            <div class="invalid-feedback d-block" *ngIf="phone.invalid && phone.touched">
+              {{ 'addEmp.PHONE_VALID' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="role" class="form-label">{{ 'addEmp.ROLE' | translate }}</label>
+            <select
+              id="role"
+              name="role"
+              class="form-select"
+              [(ngModel)]="employee.role"
+              required
+              #role="ngModel"
+            >
+              <option [ngValue]="null" disabled>{{ 'addEmp.SELECT_ROLE' | translate }}</option>
+              <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+            </select>
+            <div class="invalid-feedback d-block" *ngIf="role.invalid && role.touched">
+              {{ 'addEmp.ROLE_REQUIRED' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">
+            {{ 'addEmp.CANCEL' | translate }}
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="employeeForm.invalid || loading"
+          >
+            {{ loading ? ('addEmp.ADDING' | translate) : ('addEmp.ADD' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

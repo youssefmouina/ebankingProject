@@ -1,0 +1,81 @@
+<div class="client-table-container">
+  <h2>{{ 'CLIENT_LIST' | translate }}</h2>
+
+  <div class="table-wrapper">
+    <table class="table table-hover table-bordered text-center align-middle">
+      <thead class="table-dark">
+      <tr>
+        <th>{{ 'ID' | translate }}</th>
+        <th>{{ 'FULL_NAME' | translate }}</th>
+        <th>{{ 'USERNAME' | translate }}</th>
+        <th class="d-none d-md-table-cell">{{ 'EMAIL' | translate }}</th>
+        <th class="d-none d-lg-table-cell">{{ 'PHONE' | translate }}</th>
+        <th>{{ 'JOB' | translate }}</th>
+        <th>{{ 'VALID' | translate }}</th>
+        <th>{{ 'ACTIONS' | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let client of clients; let i = index">
+        <td>{{ client.id }}</td>
+        <td>{{ client.firstName }} {{ client.lastName }}</td>
+
+        <!-- Username -->
+        <td *ngIf="editingClientId !== client.id">{{ client.username }}</td>
+        <td *ngIf="editingClientId === client.id">
+          <input [(ngModel)]="editedClient.username" class="form-control form-control-sm" />
+        </td>
+
+        <!-- Email -->
+        <td class="d-none d-md-table-cell" *ngIf="editingClientId !== client.id">{{ client.email }}</td>
+        <td class="d-none d-md-table-cell" *ngIf="editingClientId === client.id">
+          <input [(ngModel)]="editedClient.email" class="form-control form-control-sm" />
+        </td>
+
+        <!-- Phone -->
+        <td class="d-none d-lg-table-cell" *ngIf="editingClientId !== client.id">{{ client.phone }}</td>
+        <td class="d-none d-lg-table-cell" *ngIf="editingClientId === client.id">
+          <input [(ngModel)]="editedClient.phone" class="form-control form-control-sm" />
+        </td>
+
+        <!-- Job -->
+        <td *ngIf="editingClientId !== client.id">{{ client.job }}</td>
+        <td *ngIf="editingClientId === client.id">
+          <input [(ngModel)]="editedClient.job" class="form-control form-control-sm" />
+        </td>
+
+        <!-- Valid -->
+        <td>
+            <span [ngClass]="client.valid ? 'badge bg-success' : 'badge bg-danger'">
+              {{ client.valid ? ('YES' | translate) : ('NO' | translate) }}
+            </span>
+        </td>
+
+        <!-- Actions -->
+        <td class="text-nowrap">
+          <ng-container *ngIf="editingClientId !== client.id; else editingActions">
+            <button class="btn btn-sm btn-outline-success me-1"
+                    (click)="validateClient(client, client.id)"
+                    [disabled]="client.valid"
+                    [title]="'VALIDATE' | translate">
+              <i class="bi bi-check-circle"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-primary" (click)="modifyClient(client.id, client)" [title]="'MODIFY' | translate">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </ng-container>
+
+          <ng-template #editingActions>
+            <button class="btn btn-sm btn-outline-success me-1" (click)="saveClient(client.id)" [title]="'SAVE' | translate">
+              <i class="bi bi-save"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="cancelEdit()" [title]="'CANCEL' | translate">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </ng-template>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

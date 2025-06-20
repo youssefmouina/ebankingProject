@@ -1,0 +1,32 @@
+/* Modified button container styles for right alignment */
+        .top-button-set {
+            display: flex;
+            justify-content: flex-end; /* Changed from center to flex-end */
+            padding: 0px 20px; /* Added right padding */
+
+            position: absolute;
+            bottom: 10px;
+            right: 40px;
+            z-index: 100;
+
+        }
+
+
+
+        /* Button styles */
+        .too-button {
+            margin: 0 10px;
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .too-button:hover {
+            background-color: #45a049;
+        }
+

@@ -1,0 +1,125 @@
+/* ------------------ Logo ------------------ */
+.app-logo {
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.app-logo:hover {
+  transform: scale(1.05);
+}
+
+/* ------------------ Layout Base ------------------ */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+/* ------------------ Sidebar ------------------ */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(160deg, #2c3e50, #34495e);
+  color: white;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  display: block;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  padding-left: 1.2rem;
+}
+
+.sidebar nav a.active {
+  background: #1abc9c;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(26, 188, 156, 0.4);
+}
+
+/* ------------------ Language Selector ------------------ */
+.language-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.language-selector i {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  color: #ecf0f1;
+}
+
+.language-selector select {
+  background-color: #34495e;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  appearance: none;
+  background-image: none;
+  transition: background-color 0.3s ease;
+}
+
+.language-selector select:hover {
+  background-color: #3c5d76;
+}
+
+/* ------------------ Main Content ------------------ */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #f9f9f9, #f1f1f1);
+  transition: background 0.3s ease;
+  overflow: auto;
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+
+  .sidebar nav a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .language-selector {
+    margin-bottom: 0;
+    margin-left: auto;
+  }
+}

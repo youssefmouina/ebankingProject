@@ -1,0 +1,43 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">{{ 'dashboard.title' | translate }}</h1>
+
+  <div class="stats-grid">
+    <!-- Clients -->
+    <div class="stat-card gradient-blue" (click)="toggleClientStats()" style="cursor: pointer;">
+      <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+      <div class="stat-info">
+        <h3>{{ 'dashboard.totalClients' | translate }}</h3>
+        <p>{{ dashboardData?.totalClients ?? ('dashboard.loading' | translate) }}</p>
+      </div>
+    </div>
+
+    <!-- Current Accounts -->
+    <div class="stat-card gradient-green" (click)="toggleCurrentStats()" style="cursor: pointer;">
+      <div class="stat-icon"><i class="bi bi-wallet2"></i></div>
+      <div class="stat-info">
+        <h3>{{ 'dashboard.currentAccounts' | translate }}</h3>
+        <p>{{ dashboardData?.totalAccountCurrent ?? ('dashboard.loading' | translate) }}</p>
+      </div>
+    </div>
+
+    <!-- Savings Accounts -->
+    <div class="stat-card gradient-orange" (click)="toggleSavingsStats()" style="cursor: pointer;">
+      <div class="stat-icon"><i class="bi bi-piggy-bank"></i></div>
+      <div class="stat-info">
+        <h3>{{ 'dashboard.savingsAccounts' | translate }}</h3>
+        <p>{{ dashboardData?.totalAccountSavings ?? ('dashboard.loading' | translate) }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conditional Stats -->
+  <div class="mt-4" *ngIf="showClientStats">
+    <app-client-stats></app-client-stats>
+  </div>
+  <div class="mt-4" *ngIf="showCurrentStats">
+    <app-current-account-stats></app-current-account-stats>
+  </div>
+  <div class="mt-4" *ngIf="showSavingsStats">
+    <app-savings-account-stats></app-savings-account-stats>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<!--&lt;!&ndash; Chat Button &ndash;&gt;-->
+<!--<button class="chat-button" (click)="toggleChat()">-->
+<!--    🤖-->
+<!--</button>-->
+
+<!--&lt;!&ndash; Chat Interface &ndash;&gt;-->
+<!--<div class="chat-container" [class.show]="isChatOpen">-->
+<!--  <div class="chat-header bg-primary text-white p-3 d-flex justify-content-between align-items-center">-->
+<!--    <h5 class="mb-0">Bankino Assistant</h5>-->
+<!--    <button class="btn-close btn-close-white" (click)="toggleChat()"></button>-->
+<!--  </div>-->
+<!--  -->
+<!--  <div class="chat-messages p-3" #chatMessages>-->
+<!--    <div *ngFor="let message of messages" -->
+<!--         class="message" -->
+<!--         [ngClass]="message.isUser ? 'user-message' : 'bot-message'">-->
+<!--      <div class="message-content p-3 rounded"-->
+<!--           [ngClass]="message.isUser ? 'bg-primary text-white' : 'bg-light'">-->
+<!--        {{ message.text }}-->
+<!--      </div>-->
+<!--      <div *ngIf="comptes.length > 0" class="comptes-list">-->
+<!--        <div *ngFor="let compte of comptes" class="compte-item">-->
+<!--          <button>-->
+<!--            {{compte.accountType}} - {{compte.rib}}-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="chat-input p-3 border-top">-->
+<!--    <div class="input-group">-->
+<!--      <input type="text" -->
+<!--             class="form-control" -->
+<!--             placeholder="Tapez votre message ici..."-->
+<!--             [(ngModel)]="userMessage"-->
+<!--             (keyup.enter)="sendMessage()">-->
+<!--      <button class="btn btn-primary" (click)="sendMessage()">-->
+<!--        <i class="fas fa-paper-plane"></i> Envoyer-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

@@ -1,0 +1,24 @@
+/* Import Google Fonts (à mettre dans ton index.html ou Angular styles global) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&family=Merriweather&display=swap');
+
+/* Appliquer la police globalement */
+body, .container, .custom-card {
+  font-family: 'Poppins', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Tu peux changer Poppins par Roboto ou Merriweather si tu préfères */
+  font-weight: 400;
+  color: #333;
+}
+.balance {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.card {
+  border-width: 2px !important;
+}
+
+.btn {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 0;
+}

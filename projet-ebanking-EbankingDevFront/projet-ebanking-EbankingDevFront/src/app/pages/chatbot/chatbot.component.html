@@ -1,0 +1,21 @@
+<div id="chatbot-widget">
+    <button id="chatbot-toggle" aria-label="Open Chatbot" (click)="toggleChat()">💬</button>
+
+    <div id="chatbot-window" *ngIf="isOpen">
+      <div class="chat-header">
+        <span>Bankino Chatbot</span>
+        <button id="chatbot-close" aria-label="Close Chatbot" (click)="closeChat()">&times;</button>
+      </div>
+
+      <div class="chat-box">
+        <div *ngFor="let msg of messages" [ngClass]="{'user-msg': msg.sender === 'user', 'bot-msg': msg.sender === 'bot'}">
+          {{ msg.text }}
+        </div>
+      </div>
+
+      <form class="chat-form" (submit)="send(); $event.preventDefault()">
+        <input [(ngModel)]="clientQuestion" name="clientQuestion" type="text" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,156 @@
+{
+  "navDASHBOARD": "Tableau de bord",
+  "navCLIENTS": "Clients",
+  "navTRANSFERS": "Virements",
+  "navDEPOSITS": "Dépôts",
+  "LOGOUT": "Se déconnecter",
+  "navLANGUAGE": "Langue",
+  "stats": {
+    "totalAccounts": "Comptes Totals",
+    "totalBalance": "Solde Total",
+    "averageBalance": "Solde Moyen",
+    "newThisMonth": "Nouveaux Ce Mois",
+    "showLastMonths": "Afficher :",
+    "lastXMonths": "Derniers {{count}} mois",
+    "openedPerMonth": "Comptes Ouverts Par Mois",
+    "balanceDistribution": "Répartition des Soldes"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord Bancaire",
+    "totalClients": "Clients Totals",
+    "currentAccounts": "Comptes Courants",
+    "savingsAccounts": "Comptes Épargne",
+    "loading": "Chargement..."
+  },
+  "clientRegistrations": {
+    "title": "Inscriptions Clients",
+    "monthly": "Mensuel",
+    "month_plural": "mois",
+    "yearly": "Annuel",
+    "month": "mois",
+    "year_plural": "années",
+    "year": "An",
+    "lastPeriods": "Derniers {{count}} {{period}}"
+  },
+  "savingsAccountStatistics": "Statistiques du compte épargne",
+  "filter": {
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "lastNMonths": "Derniers {{count}} mois",
+    "lastNYears": "Dernières {{count}} années"
+  },
+  "statsSAVING": {
+    "averageDeposit": "Dépôt moyen",
+    "monthlyGrowth": "Croissance mensuelle",
+    "newAccounts": "Nouveaux comptes"
+  },
+  "transfers": {
+    "title": "Historique des Virements",
+    "makeTransfer": "Effectuer un Virement",
+    "id": "ID",
+    "sender": "Émetteur",
+    "receiver": "Récepteur",
+    "amount": "Montant (DH)",
+    "date": "Date",
+    "type": "Type",
+    "receipt": "Reçu",
+    "instant": "Instantané",
+    "normal": "Normal",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page"
+  },
+  "transferModal": {
+    "title": "Effectuer un Virement",
+    "senderRIB": "RIB de l'émetteur",
+    "receiverRIB": "RIB du bénéficiaire",
+    "amount": "Montant (DH)",
+    "type": "Type de virement",
+    "normal": "Normal",
+    "instant": "Instantané",
+    "cancel": "Annuler",
+    "confirm": "Valider",
+    "senderRIBError": "Le RIB doit contenir exactement 24 chiffres.",
+    "receiverRIBError": "Le RIB doit contenir exactement 24 chiffres.",
+    "amountError": "Le montant doit être un nombre positif."
+  },
+  "receiptModal": {
+    "title": "Reçu du Virement #{{id}}",
+    "loading": "Chargement du reçu...",
+    "error": "Une erreur est survenue lors du chargement du reçu.",
+    "close": "Fermer"
+  },
+  "CLIENT_LIST": "Liste des clients",
+  "ID": "ID",
+  "FULL_NAME": "Nom complet",
+  "USERNAME": "Nom d'utilisateur",
+  "EMAIL": "Email",
+  "PHONE": "Téléphone",
+  "JOB": "Emploi",
+  "VALID": "Valide",
+  "ACTIONS": "Actions",
+  "VALIDATE": "Valider",
+  "MODIFY": "Modifier",
+  "SAVE": "Enregistrer",
+  "CANCEL": "Annuler",
+  "YES": "Oui",
+  "NO": "Non",
+  "navEMPLOYEES": "Employées",
+
+  "unauthorized": {
+    "title": "Accès non autorisé",
+    "message": "Vous n'êtes pas autorisé à consulter cette page.",
+    "contact": "Veuillez contacter votre administrateur si vous pensez qu'il s'agit d'une erreur."
+  },
+  "TRANSFER": {
+    "SUCCESS_TITLE": "Virement effectué",
+    "SUCCESS_TEXT": "Le virement a été réalisé avec succès.",
+    "ERROR_TEXT": "Une erreur est survenue lors du virement.",
+    "CONFIRM_BUTTON": "Fermer"
+  },
+  "employee": {
+    "addSuccess": "Administrateur ajouté avec succès !",
+    "addTitle": "Succès",
+    "addErrorTitle": "Erreur",
+    "addErrorMessage": "Erreur lors de l’ajout de l’administrateur."
+  },
+  "addEmp": {
+    "ADD_ADMIN": "Ajouter un Administrateur",
+    "CLOSE": "Fermer",
+    "LAST_NAME": "Nom",
+    "LAST_NAME_REQUIRED": "Le nom est obligatoire.",
+    "FIRST_NAME": "Prénom",
+    "FIRST_NAME_REQUIRED": "Le prénom est obligatoire.",
+    "EMAIL": "Email",
+    "EMAIL_VALID": "Email valide requis.",
+    "PASSWORD": "Mot de passe",
+    "PASSWORD_REQUIRED": "Le mot de passe est requis (min. 6 caractères).",
+    "PHONE": "Téléphone",
+    "PHONE_VALID": "Téléphone valide requis.",
+    "ROLE": "Rôle",
+    "SELECT_ROLE": "-- Sélectionnez un rôle --",
+    "ROLE_REQUIRED": "Le rôle est obligatoire.",
+    "CANCEL": "Annuler",
+    "ADDING": "Ajout en cours...",
+    "ADD": "Ajouter"
+  },
+  "employeecomp": {
+    "title": "Liste des Employés",
+    "addAdminBtn": "Ajouter un Administrateur",
+    "table": {
+      "id": "ID",
+      "lastName": "Nom",
+      "firstName": "Prénom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "role": "Rôle",
+      "createdAt": "Date de création"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "page": "Page",
+      "next": "Suivant"
+    }
+  }
+
+}

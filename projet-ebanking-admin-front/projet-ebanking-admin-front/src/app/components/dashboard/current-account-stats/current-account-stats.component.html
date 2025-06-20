@@ -1,0 +1,35 @@
+<div class="stats-grid mb-4">
+  <div class="stat-card">{{ 'stats.totalAccounts' | translate }}: {{ totalAccounts }}</div>
+  <div class="stat-card">{{ 'stats.totalBalance' | translate }}: {{ totalBalance | number:'1.0-0' }} $</div>
+  <div class="stat-card">{{ 'stats.averageBalance' | translate }}: {{ averageBalance | number:'1.2-2' }} $</div>
+  <div class="stat-card">{{ 'stats.newThisMonth' | translate }}: {{ newAccountsThisMonth }}</div>
+</div>
+
+<div class="d-flex align-items-center gap-3 mb-3">
+  <label for="limitSelect" class="form-label mb-0">{{ 'stats.showLastMonths' | translate }}</label>
+  <select id="limitSelect" class="form-select form-select-sm w-auto" [(ngModel)]="limit" (change)="onFilterChange()">
+    <option *ngFor="let n of availableLimits" [ngValue]="n">
+      {{ 'stats.lastXMonths' | translate:{ count: n } }}
+    </option>
+  </select>
+</div>
+
+<div class="charts-grid">
+  <div class="chart-box">
+    <h5>{{ 'stats.openedPerMonth' | translate }}</h5>
+    <canvas baseChart
+            [data]="accountsChartData"
+            [options]="accountsChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </div>
+
+  <div class="chart-box">
+    <h5>{{ 'stats.balanceDistribution' | translate }}</h5>
+    <canvas baseChart
+            [data]="balancePieData"
+            [options]="balancePieOptions"
+            [type]="'doughnut'">
+    </canvas>
+  </div>
+</div>

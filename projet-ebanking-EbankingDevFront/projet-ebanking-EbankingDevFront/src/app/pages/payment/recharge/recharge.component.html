@@ -1,0 +1,185 @@
+<div class="container mt-4">
+  <!-- Message de succès -->
+  <div *ngIf="showSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" (click)="showSuccessMessage = false" aria-label="Close"></button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let operator of operators" class="col">
+      <div class="card h-100 shadow-sm hover-card">
+        <div class="card-body text-center">
+          <div class="operator-logo mb-3">
+            <img
+              [src]="operator.logo"
+              [alt]="operator.name + ' logo'"
+              class="img-fluid">
+          </div>
+          <h4 class="card-title fw-bold">{{operator.name}}</h4>
+          <p class="card-text text-muted">{{operator.rechargeDescription | translate}}</p>
+          <button
+              class="btn btn-primary w-100 "
+              (click)="handleRecharge(operator.name)"
+              style="background-color: #004080; color: white;"
+          >{{'rechargeNow' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showRechargeForm" class="form-overlay">
+  <div class="form-container">
+    <h3>Recharge {{selectedOperator}}</h3>
+    <form [formGroup]="rechargeForm">
+      <div class="mb-3">
+        <label for="compteId" class="form-label fw-bold">Choisissez Votre Compte</label>
+        <select id="compteId" class="form-select account-select" required (change)="onCompteChange($event)">
+          <option value="" disabled selected>-- Sélectionnez un compte --</option>
+          <option *ngFor="let compte of comptesCourants" [value]="compte.rib">
+            {{ compte.rib }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Affichage des détails du compte sélectionné -->
+      <div *ngIf="selectedCompte" class="mt-3 p-3 border rounded bg-light">
+        <p><strong>RIB :</strong> {{ selectedCompte.rib }}</p>
+        <p>
+          <strong>Solde :</strong>
+          <span [ngClass]="{ 'text-success': selectedCompte.solde > 0, 'text-danger': selectedCompte.solde <= 0 }">
+            {{ selectedCompte.solde }} MAD
+          </span>
+        </p>
+
+        <!-- Message d'avertissement si paiement en ligne désactivé -->
+        <div *ngIf="!selectedCompte.autorisePaiementEnLigne" class="alert alert-warning mt-2">
+          <i class="fas fa-exclamation-triangle"></i>
+          Le paiement en ligne est désactivé pour ce compte. Veuillez l'activer dans les paramètres de votre compte pour pouvoir effectuer une recharge.
+        </div>
+
+        <!-- Message d'avertissement si solde insuffisant -->
+        <div *ngIf="selectedMontant && selectedCompte && selectedCompte.solde < parseFloatValue(selectedMontant)" class="alert alert-danger mt-2">
+          <i class="fas fa-exclamation-circle"></i>
+          votre Solde Actuel est  insuffisant pour cette opération.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Numéro de téléphone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phoneNumber"
+          formControlName="phoneNumber"
+          [ngClass]="{'is-invalid': rechargeForm.get('phoneNumber')?.invalid && rechargeForm.get('phoneNumber')?.touched}"
+        >
+        <div class="invalid-feedback" *ngIf="rechargeForm.get('phoneNumber')?.errors?.['pattern']">
+          Le numéro doit commencer par 06 ou 07 et contenir 10 chiffres au total
+        </div>
+        <div class="invalid-feedback" *ngIf="rechargeForm.get('phoneNumber')?.errors?.['required'] && rechargeForm.get('phoneNumber')?.touched">
+          Le numéro de téléphone est requis
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="montant" class="form-label">Montant</label>
+        <select
+          class="form-control"
+          id="montant"
+          formControlName="montant"
+          (change)="onMontantChange($event)"
+          [ngClass]="{'is-invalid': rechargeForm.get('montant')?.invalid && rechargeForm.get('montant')?.touched}"
+        >
+          <option value="" disabled selected>Choisir un montant</option>
+          <option value="10">10 DH</option>
+          <option value="20">20 DH</option>
+          <option value="30">30 DH</option>
+          <option value="50">50 DH</option>
+          <option value="100">100 DH</option>
+          <option value="10500">10500 DH</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="rechargeForm.get('montant')?.errors?.['required'] && rechargeForm.get('montant')?.touched">
+          Veuillez sélectionner un montant
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button type="button" class="btn btn-secondary" (click)="showRechargeForm = false">Annuler</button>
+        <button type="submit" class="btn btn-primary"
+         style="background-color: #004080; color: white;"
+         [disabled]="!isFormValid() || isProcessing"
+         (click)="DisplayEcodeModal()">
+         <ng-container *ngIf="!isProcessing; else loadingTpl">Validate</ng-container>
+          <ng-template #loadingTpl>
+            <span class="spinner-btn"></span> Processing...
+          </ng-template>
+          <!--[disabled]="!isFormValid() || isProcessing"
+          (click)="confirmRecharge()">
+          <span *ngIf="!isProcessing">Confirmer</span>
+          <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          <span *ngIf="isProcessing">Traitement...</span>
+        </button>-->
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- MODALE POUR VERIFICATION PAR EMAIL -->
+<div *ngIf="showEcodeModal" class="ecode-modal-overlay">
+  <div class="ecode-modal-content">
+    <button class="ecode-close-button" (click)="cancel()">×</button>
+    <h3>Enter Votre E-code</h3>
+    <p>Veuillez saisir votre E-code pour valider cette opération</p>
+
+    <form (ngSubmit)="confirmRecharge()">
+      <input
+        name="verificationCode"
+        [(ngModel)]="code"
+        type="text"
+        pattern="[0-9]*"
+        maxlength="4"
+        placeholder="Enter votre E-Code"
+        required
+        (keypress)="allowOnlyNumbers($event)"
+      />
+
+      <div class="ecode-actions">
+        <button type="submit" class="validate-btn">
+          <ng-container *ngIf="!isLoadingForEcodeVeriFication; else loadingTpl">Verify</ng-container>
+          <ng-template #loadingTpl>
+            <span class="spinner-btn"></span> ...Processing
+          </ng-template>
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE SUCCÈS -->
+<div class="success-modal-overlay" *ngIf="showSuccessModal">
+  <div class="success-modal-content">
+    <button class="success-close-button" (click)="closeSuccessModal()">×</button>
+    <h2>Succès !</h2>
+    <p>Votre recharge a été effectué avec succès</p>
+  </div>
+</div>
+
+<!-- MODALE ÉCHEC -->
+<div class="failure-modal-overlay" *ngIf="showFailureModal">
+  <div class="failure-modal-content">
+    <button class="failure-close-button" (click)="closeFailureModal()">×</button>
+    <h2>Échec de Votre Opération</h2>
+    <p>Problème lors de la modification de votre eCode. Assurez-vous que toutes les informations sont correctes et que vous êtes connecté.</p>
+  </div>
+</div>
+
+
+
+
+
+
+

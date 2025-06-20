@@ -1,0 +1,291 @@
+<div class="container mt-4">
+  <!-- Comptes affichés par statut -->
+  <div class="row d-flex justify-content-center">
+    <ng-container *ngFor="let status of getVisibleStatuses(); let i = index; let len = count">
+      <div
+        class="mb-4"
+        [ngClass]="{
+          'col-md-4 offset': len === 3,
+          'col-md-5': len === 2,
+          'col-md-6': len === 1
+        }"
+      >
+        <div class="card custom-card shadow-sm border-0 rounded-4" [ngClass]="status + '-card'">
+          <div class="card-header text-white text-capitalize rounded-top-4 fw-bold">
+            {{ 'ACCOUNT.ACCOUNTS' | translate:{ status: ('STATUS.' + status.toUpperCase()) | translate } }}
+          </div>
+          <div class="card-body d-flex flex-column gap-3">
+            <div
+              *ngFor="let account of getAccountsByStatus(status)"
+              class="account-card p-3 rounded-3 shadow-sm"
+              [class.selected-account]="selectedAccount?.rib === account.rib"
+              (click)="selectAccount(account)"
+              style="cursor: pointer; transition: 0.3s ease;"
+            >
+              <span
+                class="account-type-badge"
+                [ngClass]="{
+                  'COURANT': account.accountType === 'CCourant',
+                  'EPARGNE': account.accountType === 'CEpargne'
+                }"
+              >
+                {{ account.accountType === 'CEpargne' ? ('ACCOUNT.EPARGNE' | translate) : ('ACCOUNT.COURANT' | translate) }}
+              </span>
+
+             <!-- Toggle Switch pour comptes actifs -->
+                <div *ngIf="account.status === 'ACTIF' && account.accountType === 'CCourant'" class="form-check form-switch ms-auto">
+                  <input
+                    class="form-check-input enable-toggle"
+                    type="checkbox"
+                    role="switch"
+                    id="dotationToggle-{{ account.id }}"
+                    [checked]="account.autorisePaiementEnLigne"
+                    (change)="onDotationToggle($event, account)"
+                  />
+                  <label class="form-check-label ms-2 small" for="dotationToggle-{{ account.id }}">
+                    {{ account.autorisePaiementEnLigne ? 'Disable Dotation' : 'Enable Dotation' }}
+                  </label>
+                </div>
+
+
+
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div>
+                  <div class="fw-semibold text-uppercase small text-muted">
+                    {{ 'ACCOUNT.RIB' | translate }}
+                  </div>
+                  <div class="fs-6">{{ account.rib }}</div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-semibold text-uppercase small text-muted">
+                    {{ 'ACCOUNT.SOLDE' | translate }}
+                  </div>
+                  <div class="fs-5 fw-bold text-success">{{ account.solde }} $</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Comptes Courants - Opérations -->
+  <div *ngIf="selectedAccount && selectedAccount.accountType==='CCourant'" class="mt-4">
+    <div class="btn-group w-100 mb-3" role="group">
+      <button
+        type="button"
+        class="btn operation-btn"
+        [ngClass]="{ active: selectedOperation === 'virement' }"
+        (click)="selectOperation('virement')"
+      >
+        {{ 'OPERATION.VIREMENT' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn operation-btn"
+        [ngClass]="{ active: selectedOperation === 'recharge' }"
+        (click)="selectOperation('recharge')"
+      >
+        {{ 'OPERATION.RECHARGE' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn operation-btn"
+        [ngClass]="{ active:
+         selectedOperation === 'facture' }"
+        (click)="selectOperation('facture')"
+      >
+        {{ 'OPERATION.FACTURE' | translate }}
+      </button>
+    </div>
+
+    <!-- Virements -->
+    <div *ngIf="selectedOperation === 'virement'" class="card shadow border-0 rounded-4" [ngClass]="selectedAccount.status + '-card'">
+      <div class="card-header text-white rounded-top-4 fw-bold">
+        {{ 'TRANSFER.TITLE' | translate:{ rib: selectedAccount.rib } }}
+      </div>
+      <div class="card-body">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th>{{ 'TRANSFER.ID' | translate }}</th>
+            <th>{{ 'TRANSFER.SENDER' | translate }}</th>
+            <th>{{ 'TRANSFER.RECEIVER' | translate }}</th>
+            <th>{{ 'TRANSFER.AMOUNT' | translate }}</th>
+            <th>{{ 'TRANSFER.RECEIPT' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let v of virements">
+            <td>{{ v.id }}</td>
+            <td>{{ v.compteEmetteur.rib }}</td>
+            <td>{{ v.compteRecepteur.rib }}</td>
+            <td
+              [ngClass]="{
+                  'text-danger': v.compteEmetteur.id === selectedAccount?.id,
+                  'text-success': v.compteRecepteur.id === selectedAccount?.id
+                }"
+              class="fw-bold"
+            >
+              {{ v.montant }} $
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="viewReceipt(v)">
+                {{ 'TRANSFER.VIEW_RECEIPT' | translate }}
+              </button>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav *ngIf="totalPages > 1" class="d-flex justify-content-center mt-3">
+          <ul class="pagination rounded-4 shadow-sm">
+            <li class="page-item" [class.disabled]="page === 1">
+              <a class="page-link" (click)="setPage(page - 1)">‹</a>
+            </li>
+            <li *ngFor="let p of [].constructor(totalPages); let i = index"
+                class="page-item"
+                [class.active]="page === (i + 1)">
+              <a class="page-link" (click)="setPage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="page === totalPages">
+              <a class="page-link" (click)="setPage(page + 1)">›</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Recharges -->
+    <div *ngIf="selectedOperation === 'recharge'" class="card shadow border-0 rounded-4" [ngClass]="selectedAccount.status + '-card'">
+      <div class="card-header text-white rounded-top-4 fw-bold">
+        {{ 'RECHARGE.TITLE' | translate:{ rib: selectedAccount.rib } }}
+      </div>
+      <div class="card-body">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th>{{ 'RECHARGE.ID' | translate }}</th>
+            <th>{{ 'RECHARGE.OPERATOR' | translate }}</th>
+            <th>{{ 'RECHARGE.PHONENUMBER' | translate }}</th>
+            <th>{{ 'TRANSFER.AMOUNT' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let r of recharges">
+            <td>{{ r.id }}</td>
+            <td>{{ r.operateur }}</td>
+            <td>{{ r.phoneNumber }}</td>
+            <td class="fw-bold text-success">{{ r.montant }} $</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav *ngIf="totalPagesR > 1" class="d-flex justify-content-center mt-3">
+          <ul class="pagination rounded-4 shadow-sm">
+            <li class="page-item" [class.disabled]="page === 1">
+              <a class="page-link" (click)="setPageR(page - 1)">‹</a>
+            </li>
+            <li *ngFor="let p of [].constructor(totalPagesR); let i = index"
+                class="page-item"
+                [class.active]="page === (i + 1)">
+              <a class="page-link" (click)="setPageR(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="page === totalPagesR">
+              <a class="page-link" (click)="setPageR(page + 1)">›</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Factures -->
+    <div *ngIf="selectedOperation === 'facture'" class="card shadow border-0 rounded-4" [ngClass]="selectedAccount.status + '-card'">
+      <div class="card-header text-white rounded-top-4 fw-bold">
+        {{ 'INVOICE.TITLE' | translate:{ rib: selectedAccount.rib } }}
+      </div>
+      <div class="card-body">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th>{{ 'INVOICE.ID' | translate }}</th>
+            <th>{{ 'INVOICE.PROVIDER' | translate }}</th>
+            <th>{{ 'INVOICE.PAIDDATE' | translate }}</th>
+            <th>{{ 'TRANSFER.AMOUNT' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let f of factures">
+            <td>{{ f.id }}</td>
+            <td>{{ f.provider }}</td>
+            <td>{{ f.paidDate }}</td>
+            <td class="fw-bold text-success">{{ f.amount }} $</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav *ngIf="totalPagesI > 1" class="d-flex justify-content-center mt-3">
+          <ul class="pagination rounded-4 shadow-sm">
+            <li class="page-item" [class.disabled]="page === 1">
+              <a class="page-link" (click)="setPage(page - 1)">‹</a>
+            </li>
+            <li *ngFor="let p of [].constructor(totalPagesI); let i = index"
+                class="page-item"
+                [class.active]="page === (i + 1)">
+              <a class="page-link" (click)="setPage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="page === totalPagesI">
+              <a class="page-link" (click)="setPage(page + 1)">›</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compte Epargne sélectionné -->
+  <div *ngIf="selectedAccount && selectedAccount.accountType==='CEpargne'" class="mt-3">
+    <div class="card border-0 shadow-sm rounded-4" [ngClass]="selectedAccount.status + '-card'">
+      <div class="card-header text-white rounded-top-4 fw-bold">
+        {{ 'ACCOUNT.EPARGNE_DETAILS' | translate }}
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>{{ 'ACCOUNT.RIB' | translate }}:</strong> {{ selectedAccount.rib }}
+          </li>
+          <li class="list-group-item">
+            <strong>{{ 'ACCOUNT.SOLDE' | translate }}:</strong> {{ selectedAccount.solde }} $
+          </li>
+          <li class="list-group-item">
+            <strong>{{ 'ACCOUNT.TAUX_INTERET' | translate }}:</strong> {{ selectedAccount.tauxInterets }}%
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="receiptModalLabel">{{ 'TRANSFER.RECEIPT' | translate }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe
+          *ngIf="pdfUrl"
+          [src]="pdfUrl"
+          width="100%"
+          height="600px"
+          style="border: none;"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container my-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h2 class="text-primary">{{ 'dashboardTitle' | translate }}</h2>
+      <p class="lead">{{ 'dashboardIntro' | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Résumé des comptes -->
+  <div class="row g-4 mb-4">
+    <!-- Compte Courant -->
+    <div class="col-md-6" *ngIf="courantAccount">
+      <div class="card shadow-sm border-primary">
+        <div class="card-body">
+          <h5 class="card-title">{{ 'checkingAccountTitle' | translate }}</h5>
+          <p class="card-text balance text-success fw-bold">{{ courantAccount.solde }} $</p>
+          <small class="text-muted">{{ courantAccount.rib }}</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compte Épargne -->
+    <div class="col-md-6" *ngIf="epargneAccount">
+      <div class="card shadow-sm border-success">
+        <div class="card-body">
+          <h5 class="card-title">{{ 'savingsAccountTitle' | translate }}</h5>
+          <p class="card-text balance fw-bold text-success">{{ epargneAccount.solde }} $</p>
+          <small class="text-muted">{{ epargneAccount.rib }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Virements récents -->
+  <div class="row mb-4">
+    <div class="col">
+      <h4>{{ 'recentTransactionsTitle' | translate }}</h4>
+      <div class="table-responsive" *ngIf="recentVirements.length > 0">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>{{ 'TRANSFER.SENDER' | translate }}</th>
+            <th>{{ 'TRANSFER.RECEIVER' | translate }}</th>
+            <th>{{ 'TRANSFER.AMOUNT' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let v of recentVirements">
+            <td>{{ v.id }}</td>
+            <td>{{ v.compteEmetteur.rib }}</td>
+            <td>{{ v.compteRecepteur.rib }}</td>
+            <td [ngClass]="{
+                'text-danger': v.compteEmetteur.id === courantAccount?.id,
+                'text-success': v.compteRecepteur.id === courantAccount?.id
+              }" class="fw-bold">
+              {{ v.montant }} $
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf="recentVirements.length === 0" class="text-muted">
+        {{ 'noRecentTransactions' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <button class="btn btn-primary w-100" routerLink="/transfers">{{ 'actionTransfer' | translate }}</button>
+    </div>
+    <div class="col-md-4 mb-3">
+      <button class="btn btn-outline-secondary w-100" routerLink="/payments">{{ 'actionPayBills' | translate }}</button>
+    </div>
+    <div class="col-md-4 mb-3">
+      <button class="btn btn-outline-info w-100" routerLink="/crypto">{{ 'actionViewStatements' | translate }}</button>
+    </div>
+  </div>
+</div>

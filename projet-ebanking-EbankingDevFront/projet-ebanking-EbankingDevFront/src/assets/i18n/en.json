@@ -1,0 +1,213 @@
+{
+  "appTitle": "eBanking",
+  "navDashboard": "Dashboard",
+  "navAccounts": "Accounts",
+  "navTransfers": "Transfers",
+  "navCrypto" : "crypto",
+  "navPaiments" : "Payment",
+  "navLogout": "Logout",
+  "footerText": "© 2025 eBanking App",
+  "dashboardTitle": "Welcome to Your Bank Dashboard",
+  "dashboardIntro": "Manage your accounts, view recent transactions, and perform transfers easily.",
+  "checkingAccountTitle": "Checking Account",
+  "savingsAccountTitle": "Savings Account",
+  "creditCardTitle": "Credit Card",
+  "accountNumber1": "Account Number: 123456789",
+  "accountNumber2": "Account Number: 987654321",
+  "creditCardNumber": "Card Number: **** 1234",
+  "recentTransactionsTitle": "Recent Transactions",
+  "thDate": "Date",
+  "thDescription": "Description",
+  "thAmount": "Amount",
+  "thBalance": "Balance",
+  "descGroceryStore": "Grocery Store",
+  "descSalaryDeposit": "Salary Deposit",
+  "descElectricityBill": "Electricity Bill",
+  "actionTransfer": "Make a Transfer",
+  "actionPayBills": "Pay Bills",
+  "actionViewStatements": "View Statements",
+
+
+  "LOGIN": {
+    "TITLE": "Login",
+    "PASSWORD": "Password",
+    "CLICK": "Log In",
+    "CREATE": "Create an account",
+    "RECOVER": "Forgot password?"
+  },
+  "REGISTER": {
+    "STEPS": {
+      "INFO": "Info",
+      "EMAIL": "Email",
+      "CONTACT": "Contact",
+      "SMS": "SMS",
+      "SECURITY": "Security",
+      "DONE": "Done"
+    },
+    "TITLES": {
+      "STEP1": "Personal Information",
+      "STEP2": "Email Verification",
+      "STEP3": "Contact Information",
+      "STEP4": "SMS Verification",
+      "STEP5": "Account Security",
+      "STEP6": "Finish Registration"
+    },
+    "PLACEHOLDERS": {
+      "FIRSTNAME": "First Name",
+      "LASTNAME": "Last Name",
+      "EMAIL": "Email",
+      "USERNAME": "Username",
+      "PHONE": "Phone",
+      "JOB": "Job",
+      "PASSWORD": "Password"
+    },
+    "BUTTONS": {
+      "CONTINUE": "Continue",
+      "SEND_EMAIL_CODE": "Send Code",
+      "VERIFY_EMAIL": "Verify Code",
+      "SEND_SMS_CODE": "Send SMS Code",
+      "VERIFY_SMS": "Verify Code",
+      "SUBMIT": "Create Account",
+      "BACK": "Back",
+      "LOGIN": "Back to Login"
+    },
+    "MESSAGES": {
+      "EMAIL_CODE_SENT": "Code sent to {{email}}",
+      "SMS_CODE_SENT": "SMS code sent to {{phone}}",
+      "EMAIL_INSTRUCTION": "We will send a verification code to your email",
+      "SMS_INSTRUCTION": "We will send a verification code via SMS to {{phone}}",
+      "ALL_DONE": "All information is complete",
+      "FINAL_PROMPT": "Click 'Create Account' to complete your registration",
+      "PASSWORD_NOTE": "Please enter 123456 as your password for now. This feature is not yet fully implemented."
+
+    }
+  },
+  "FORGOTPASSWORD": {
+    "STEPS": {
+      "EMAIL": "Email",
+      "VERIFYTOKEN": "Verify Code",
+      "MODIFYPASSWORD": "Change Password"
+    },
+    "TITLES": {
+      "STEP1": "Enter Your Email",
+      "STEP2": "Email Verification",
+      "STEP3": "Reset Your Password"
+    },
+    "PLACEHOLDERS": {
+      "EMAIL": "Email address",
+      "NEWPASSWORD": "New Password",
+      "CONFIRMPASSWORD": "Confirm Password"
+    },
+    "MESSAGES": {
+      "EMAILINSTRUCTION": "We will send a verification code to your email address",
+      "CODESENT": "Verification code sent to {{ email }}"
+    },
+    "BUTTONS": {
+      "CONTINUE": "Continue",
+      "SENDCODE": "Send Code",
+      "VERIFY": "Verify Code",
+      "BACK": "Back",
+      "BACKTOLOGIN": "Back to Login"
+    },
+    "ERRORS": {
+      "INVALIDEMAIL": "Please enter a valid email address.",
+      "INVALIDCODE": "The verification code is incorrect or expired.",
+      "PASSWORDMISMATCH": "Passwords do not match.",
+      "WEAKPASSWORD": "Password must be at least 8 characters and contain letters and numbers."
+    }
+  },
+
+  "STATUS": {
+    "ACTIF": "active",
+    "BLOQUE": "blocked",
+    "FERME": "closed"
+  },
+  "ACCOUNT": {
+    "ACCOUNTS": "{{status}} Accounts",
+    "RIB": "RIB",
+    "SOLDE": "Balance",
+    "COURANT": "Checking account",
+    "EPARGNE": "Savings account",
+    "EPARGNE_DETAILS": "Savings account details",
+    "TAUX_INTERET":"interest rate"
+  },
+  "TRANSFER": {
+    "TITLE": "Transfers of checking account",
+    "ID": "ID",
+    "SENDER": "Sender",
+    "RECEIVER": "Receiver",
+    "VIEW_RECEIPT": "View receipt",
+    "TITLE1": "Transfers",
+    "FROM_ACCOUNT": "From Account",
+    "CHOOSE_ACCOUNT": "Choose account",
+    "TO_ACCOUNT": "To Account",
+    "TO_ACCOUNT_PLACEHOLDER": "Enter recipient account rib",
+    "AMOUNT": "Amount",
+    "AMOUNT_PLACEHOLDER": "$0.00",
+    "TYPE_TRANSACTION": "Transaction Type",
+    "TYPE_INSTANT": "Instant",
+    "TYPE_NORMAL": "Normal",
+    "TRANSFER_BUTTON": "Transfer",
+    "RECEIPT": "Transfer Receipt",
+    "CLOSE": "Close"
+  },
+  "OPERATION": {
+    "VIREMENT": "Transfers",
+    "RECHARGE": "mobile top-up",
+    "FACTURE": "Invoices"
+  },
+  "RECHARGE":{
+    "ID": "Id",
+    "TITLE": "Mobile top-up history",
+    "OPERATOR": "Operator",
+    "PHONENUMBER": "Phone number"
+  },
+  "INVOICE":{
+    "ID": "Id",
+    "PAIDDATE": "Date of payement",
+    "PROVIDER": "Provider"
+  },
+  "operator": {
+    "inwi": {
+      "description": "Easy and fast Inwi recharge"
+    },
+    "orange": {
+      "description": "One-click Orange recharge"
+    },
+    "iam": {
+      "description": "Secure IAM recharge"
+    }
+  },
+  "rechargeNow": "Recharge Now",
+  "PAYMENT": {
+    "EAU_ELECTRICITE": "Water & Electricity",
+    "TAXES": "Taxes",
+    "INTERNET": "Internet & Telephony",
+    "PAY": "Pay {{provider}}",
+    "MODAL_TITLE": "Find Your Invoice in {{provider}}",
+    "REFERENCE_LABEL": "Reference No:",
+    "REFERENCE_PLACEHOLDER": "Enter contract number",
+    "SEARCH_BUTTON": "Search",
+    "INVOICE_AMOUNT": "{{amount}} DH",
+    "INVOICE_DUE_DATE": "Due date: {{date}}",
+    "SELECT_RIB": "RIB: {{rib}}",
+    "BALANCE": "Balance: {{balance}} MAD",
+    "ENABLE_DOTATION": "Please enable dotation",
+    "INSUFFICIENT_BALANCE": "Insufficient balance",
+    "PAY_INVOICE": "Pay Invoice",
+    "NO_INVOICE_FOUND": "No invoice found",
+    "SUCCESS_TITLE": "Payment Successful!",
+    "SUCCESS_MESSAGE": "Thank you, your payment was processed successfully.",
+    "FAILURE_TITLE": "Payment Failed",
+    "FAILURE_MESSAGE": "Unfortunately, your payment could not be processed. Please try again.",
+
+
+
+
+    "PHONE_RECHARGE": "Phone Recharge",
+    "INVOICES": "Invoices"
+  },
+  "navSettings": "Settings"
+
+
+}

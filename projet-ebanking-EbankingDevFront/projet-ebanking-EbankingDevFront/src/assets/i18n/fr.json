@@ -1,0 +1,206 @@
+{
+  "appTitle": "Banque en ligne",
+  "navDashboard": "Tableau de bord",
+  "navAccounts": "Comptes",
+  "navTransfers": "Virements",
+  "navPaiments" : "Paiement",
+  "navCrypto" : "crypto",
+  "navLogout": "Se déconnecter",
+  "footerText": "© 2025 Application eBanking",
+  "dashboardTitle": "Bienvenue sur votre tableau de bord bancaire",
+  "dashboardIntro": "Gérez vos comptes, consultez les transactions récentes et effectuez des virements facilement.",
+  "checkingAccountTitle": "Compte courant",
+  "savingsAccountTitle": "Compte épargne",
+  "creditCardTitle": "Carte de crédit",
+  "accountNumber1": "Numéro de compte : 123456789",
+  "accountNumber2": "Numéro de compte : 987654321",
+  "creditCardNumber": "Numéro de carte : **** 1234",
+  "recentTransactionsTitle": "Transactions récentes",
+  "thDate": "Date",
+  "thDescription": "Description",
+  "thAmount": "Montant",
+  "thBalance": "Solde",
+  "descGroceryStore": "Épicerie",
+  "descSalaryDeposit": "Dépôt de salaire",
+  "descElectricityBill": "Facture d'électricité",
+  "actionTransfer": "Effectuer un virement",
+  "actionPayBills": "Payer les factures",
+  "actionViewStatements": "Voir les relevés",
+  "STATUS": {
+    "ACTIF": "actifs",
+    "BLOQUE": "bloqués",
+    "FERME": "fermés"
+  },
+
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "PASSWORD": "Mot de passe",
+    "CLICK": "Se connecter",
+    "CREATE": "Créer un compte",
+    "RECOVER": "Mot de passe oublié ?"
+  },
+  "REGISTER": {
+    "STEPS": {
+      "INFO": "Info",
+      "EMAIL": "Email",
+      "CONTACT": "Contact",
+      "SMS": "SMS",
+      "SECURITY": "Sécurité",
+      "DONE": "Fini"
+    },
+    "TITLES": {
+      "STEP1": "Informations personnelles",
+      "STEP2": "Vérification Email",
+      "STEP3": "Informations de contact",
+      "STEP4": "Vérification SMS",
+      "STEP5": "Sécurité du compte",
+      "STEP6": "Finaliser l'inscription"
+    },
+    "PLACEHOLDERS": {
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "EMAIL": "Email",
+      "USERNAME": "Nom d'utilisateur",
+      "PHONE": "Téléphone",
+      "JOB": "Profession",
+      "PASSWORD": "Mot de passe"
+    },
+    "BUTTONS": {
+      "CONTINUE": "Continuer",
+      "SEND_EMAIL_CODE": "Envoyer le code",
+      "VERIFY_EMAIL": "Vérifier le code",
+      "SEND_SMS_CODE": "Envoyer le code SMS",
+      "VERIFY_SMS": "Vérifier le code",
+      "SUBMIT": "Créer le compte",
+      "BACK": "Retour",
+      "LOGIN": "Retour à la connexion"
+    },
+    "MESSAGES": {
+      "EMAIL_CODE_SENT": "Code envoyé à {{email}}",
+      "SMS_CODE_SENT": "Code SMS envoyé au {{phone}}",
+      "EMAIL_INSTRUCTION": "Nous allons envoyer un code de vérification à votre email",
+      "SMS_INSTRUCTION": "Nous allons envoyer un code de vérification par SMS au {{phone}}",
+      "ALL_DONE": "Toutes les informations sont complètes",
+      "FINAL_PROMPT": "Cliquez sur \"Créer le compte\" pour finaliser votre inscription",
+      "PASSWORD_NOTE": "Veuillez saisir 123456 comme mot de passe pour le moment. Cette fonctionnalité n'est pas encore entièrement implémentée."
+    }
+  },
+  "FORGOTPASSWORD": {
+    "STEPS": {
+      "EMAIL": "Email",
+      "VERIFYTOKEN": "Vérifier le code",
+      "MODIFYPASSWORD": "Modifier le mot de passe"
+    },
+    "TITLES": {
+      "STEP1": "Entrez votre email",
+      "STEP2": "Vérification Email",
+      "STEP3": "Réinitialisez votre mot de passe"
+    },
+    "PLACEHOLDERS": {
+      "EMAIL": "Adresse email",
+      "NEWPASSWORD": "Nouveau mot de passe",
+      "CONFIRMPASSWORD": "Confirmez le mot de passe"
+    },
+    "MESSAGES": {
+      "EMAILINSTRUCTION": "Nous allons envoyer un code de vérification à votre adresse email",
+      "CODESENT": "Code de vérification envoyé à {{ email }}"
+    },
+    "BUTTONS": {
+      "CONTINUE": "Continuer",
+      "SENDCODE": "Envoyer le code",
+      "VERIFY": "Vérifier le code",
+      "BACK": "Retour",
+      "BACKTOLOGIN": "Retour à la connexion"
+    },
+    "ERRORS": {
+      "INVALIDEMAIL": "Veuillez entrer une adresse email valide.",
+      "INVALIDCODE": "Le code de vérification est incorrect ou a expiré.",
+      "PASSWORDMISMATCH": "Les mots de passe ne correspondent pas.",
+      "WEAKPASSWORD": "Le mot de passe doit contenir au moins 8 caractères, lettres et chiffres."
+    }
+  },
+
+  "ACCOUNT": {
+    "ACCOUNTS": "Comptes {{status}}",
+    "RIB": "RIB",
+    "SOLDE": "Solde",
+    "COURANT": "Compte courant",
+    "EPARGNE": "Compte epargne",
+    "EPARGNE_DETAILS": "détails du compte épargne",
+    "TAUX_INTERET": "Taux d'intérêt"
+  },
+  "TRANSFER": {
+    "TITLE": "Virements du compte courant",
+    "ID": "ID",
+    "SENDER": "Émetteur",
+    "RECEIVER": "Destinataire",
+    "VIEW_RECEIPT": "Voir le reçu",
+    "TITLE1": "Virements",
+    "FROM_ACCOUNT": "Compte Émetteur",
+    "CHOOSE_ACCOUNT": "Choisissez un compte",
+    "TO_ACCOUNT": "Compte Destinataire",
+    "TO_ACCOUNT_PLACEHOLDER": "Entrez le RIB du compte destinataire",
+    "AMOUNT": "Montant",
+    "AMOUNT_PLACEHOLDER": "0,00 €",
+    "TYPE_TRANSACTION": "Type de transaction",
+    "TYPE_INSTANT": "Instantanée",
+    "TYPE_NORMAL": "Normale",
+    "TRANSFER_BUTTON": "Effectuer le virement",
+    "RECEIPT": "Reçu du virement",
+    "CLOSE": "Fermer"
+  },
+  "OPERATION": {
+    "VIREMENT": "Virements",
+    "RECHARGE": "Recharges téléphoniques",
+    "FACTURE": "Factures"
+  },
+  "RECHARGE":{
+    "ID": "Id",
+    "TITLE": "Historique des recharges",
+    "OPERATOR": "Operateur",
+    "PHONENUMBER": "Numèro de téléphone"
+
+  },
+  "INVOICE":{
+    "ID": "Id",
+    "PAIDDATE": "Date de paiement",
+    "PROVIDER": "Prestataire"
+  },
+  "operator": {
+    "inwi": {
+      "description": "Recharge Inwi facile et rapide"
+    },
+    "orange": {
+      "description": "Recharge Orange en un clic"
+    },
+    "iam": {
+      "description": "Recharge IAM sécurisée"
+    }
+  },
+  "rechargeNow": "Recharger maintenant",
+  "PAYMENT": {
+    "EAU_ELECTRICITE": "Eau et Électricité",
+    "TAXES": "Taxes",
+    "INTERNET": "Internet et Téléphonie",
+    "PAY": "Payer {{provider}}",
+    "MODAL_TITLE": "Trouver votre facture chez {{provider}}",
+    "REFERENCE_LABEL": "N° de référence :",
+    "REFERENCE_PLACEHOLDER": "Saisissez le numéro de contrat",
+    "SEARCH_BUTTON": "Rechercher",
+    "INVOICE_AMOUNT": "{{amount}} DH",
+    "INVOICE_DUE_DATE": "Date d'échéance : {{date}}",
+    "SELECT_RIB": "RIB : {{rib}}",
+    "BALANCE": "Solde : {{balance}} MAD",
+    "ENABLE_DOTATION": "Veuillez activer la dotation",
+    "INSUFFICIENT_BALANCE": "Solde insuffisant",
+    "PAY_INVOICE": "Payer la facture",
+    "NO_INVOICE_FOUND": "Aucune facture trouvée",
+    "SUCCESS_TITLE": "Paiement Réussi !",
+    "SUCCESS_MESSAGE": "Merci, votre paiement a été traité avec succès.",
+    "FAILURE_TITLE": "Échec du paiement",
+    "FAILURE_MESSAGE": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
+    "PHONE_RECHARGE": "Rechargement téléphonique",
+    "INVOICES": "Factures"
+  },
+  "navSettings": "Paramètres"
+}

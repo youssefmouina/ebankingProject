@@ -1,0 +1,33 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'receiptModal.title' | translate:{ id: virementId } }}
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ng-container *ngIf="pdfUrl; else loadingOrError">
+          <iframe [src]="pdfUrl" width="100%" height="600px" class="border"></iframe>
+        </ng-container>
+
+        <ng-template #loadingOrError>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ 'receiptModal.error' | translate }}
+          </div>
+          <div *ngIf="!errorMessage" class="text-center text-muted">
+            {{ 'receiptModal.loading' | translate }}
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">
+          {{ 'receiptModal.close' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

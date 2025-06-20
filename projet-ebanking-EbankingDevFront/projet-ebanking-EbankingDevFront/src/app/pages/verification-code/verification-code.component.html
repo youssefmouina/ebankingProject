@@ -1,0 +1,44 @@
+<div class="verification-container">
+  <!-- <div class="verification-title">
+    <h2>Enter Verification Code</h2>
+    <p>We've sent a 6-digit code to your device</p>
+  </div> -->
+
+  <form [formGroup]="verificationForm" class="verification-form">
+    <div class="code-inputs" formArrayName="codes" (paste)="onContainerPaste($event)">
+      <input
+        #codeInput
+        type="text"
+        class="code-input"
+        [class.filled]="codesArray.at(i).value"
+        [class.error]="codesArray.at(i).invalid && !codesArray.at(i).untouched"
+        [formControlName]="i"
+        maxlength="1"
+        inputmode="numeric"
+        pattern="[0-9]"
+        autocomplete="one-time-code"
+        (input)="onInput($event, i)"
+        (keydown)="onKeyDown($event, i)"
+        (paste)="onPaste($event, i)"
+        (focus)="onFocus($event, i)"
+        *ngFor="let control of codesArray.controls; let i = index"
+      />
+    </div>
+  </form>
+  <!-- <div class="verification-actions">
+    <button
+      type="button"
+      class="clear-btn"
+      (click)="clear()"
+    >
+      Clear
+    </button>
+
+    <button
+      type="button"
+      class="resend-btn"
+    >
+      Resend Code
+    </button>
+  </div> -->
+</div>

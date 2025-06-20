@@ -1,0 +1,627 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width:40vw;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #a31515;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #0159b1;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Invoice Component Styles */
+.invoice {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Invoice Details Section */
+.invoice-details {
+  background: linear-gradient(135deg, #002c5e 0%, #001a3a 100%);
+  color: white;
+  padding: 2rem;
+  position: relative;
+}
+
+.invoice-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.invoice-details p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.invoice-details p:last-child {
+  margin-bottom: 0;
+}
+
+.invoice-details strong {
+  font-weight: 700;
+  color: #f8fafc;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.comptes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontal center */
+  justify-content: center; /* vertical center */
+}
+
+
+/* Current Accounts Section */
+.comptes-courant {
+  background: #f8fafc;
+  margin: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #d63302;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.comptes-courant:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(214, 51, 2, 0.15);
+}
+
+.comptes-courant::before {
+  content: '💳';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.comptes-courant p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.comptes-courant p:last-child {
+  margin-bottom: 0;
+}
+
+.comptes-courant strong {
+  color: #1f2937;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.info-message {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Warning color for "Please enable dotation" */
+.disabled-compte-dotation .info-message {
+  color: #92400e;           /* Dark amber/orange text */
+  background-color: #fef3c7; /* Light amber/yellow background */
+  border: 1px solid #fbbf24; /* Amber border */
+}
+
+/* Error color for "Insuffisant sold" */
+.disabled-compte-insuffisant-sold .info-message {
+  color: #b91c1c;           /* Strong red text */
+  background-color: #fee2e2; /* Light red/pink background */
+  border: 1px solid #f87171; /* Red border */
+}
+
+
+
+
+
+.comptes-courant {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  user-select: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Enabled compte */
+.enabled-compte {
+  cursor: pointer;
+  background-color: #f0fdf4; /* light green */
+  border-left: 4px solid #4ade80; /* green accent */
+  color: #065f46; /* dark green text */
+}
+
+.enabled-compte:hover {
+  background-color: #dcfce7; /* brighter green on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 222, 128, 0.3);
+}
+
+/* Selected enabled compte */
+.selected-enabled-compte {
+  background-color: #bbf7d0 !important; /* stronger green */
+  border-left: 4px solid #059669 !important; /* darker green border */
+  color: #064e3b !important; /* darker text */
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(5, 150, 105, 0.4);
+  font-weight: 600;
+}
+
+/* Disabled due to payment authorization */
+.disabled-compte-dotation {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background-color: #f3f4f6; /* light gray */
+  border-left: 4px solid #9ca3af; /* gray border */
+  color: #6b7280; /* muted text */
+  font-style: italic;
+}
+
+/* Disabled due to insufficient balance */
+.disabled-compte-insuffisant-sold {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #fef2f2; /* very light red */
+  border-left: 4px solid #f87171; /* soft red border */
+  color: #991b1b; /* dark red text */
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+/* Payment Button */
+.invoice button[type="submit"] {
+  width: calc(100% - 3rem);
+  margin: 1.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #d63302 0%, #b82800 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.invoice button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(214, 51, 2, 0.4);
+}
+
+.invoice button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.invoice button[type="submit"]:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* .comptes-courant {
+  width:80%;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.comptes-courant.selected {
+  background-color: #d3f9d8;
+  border-color: #4caf50;
+  font-weight: bold;
+  transform: scale(1.1);
+  z-index: 1;
+} */
+
+
+
+
+
+.invoice-error {
+  background-color: #ffe0e0; /* light red background */
+  color: #d8000c;            /* red text */
+  border: 1px solid #d8000c;
+  padding: 12px 16px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .invoice {
+    margin: 1rem;
+    border-radius: 8px;
+  }
+
+  .invoice-details {
+    padding: 1.5rem;
+  }
+
+  .invoice-details p {
+    font-size: 1rem;
+  }
+
+  .comptes-courant {
+    margin: 1rem;
+    padding: 1.25rem;
+  }
+
+  .invoice button[type="submit"] {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoice {
+    margin: 0.5rem;
+  }
+
+  .invoice-details {
+    padding: 1.25rem;
+  }
+
+  .comptes-courant {
+    margin: 0.75rem;
+    padding: 1rem;
+  }
+
+  .comptes-courant::before {
+    display: none;
+  }
+
+  .invoice button[type="submit"] {
+    margin: 0.75rem;
+    width: calc(100% - 1.5rem);
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
+/* this is for successPaymentModal and failurePaymentModal */
+/* Success Modal */
+/* Success and Failure Modal Overlay - Common Styles */
+.success-modal-overlay,
+.failure-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content - Common Styles */
+.success-modal-content,
+.failure-modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Close Buttons - Common Styles */
+.success-close-button,
+.failure-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.success-close-button:hover,
+.failure-close-button:hover {
+  color: #333;
+}
+
+/* Success Modal Specific Styles */
+.success-modal-content {
+  border-top: 5px solid #4CAF50;
+}
+
+.success-modal-content h2 {
+  color: #4CAF50;
+  margin-bottom: 15px;
+}
+
+.success-modal-content p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Failure Modal Specific Styles */
+.failure-modal-content {
+  border-top: 5px solid #f44336;
+}
+
+.failure-modal-content h2 {
+  color: #f44336;
+  margin-bottom: 15px;
+}
+
+.failure-modal-content p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Animation for both modals */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-modal-content,
+.failure-modal-content {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .success-modal-content,
+  .failure-modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .success-modal-content h2,
+  .failure-modal-content h2 {
+    font-size: 20px;
+  }
+
+  .success-modal-content p,
+  .failure-modal-content p {
+    font-size: 14px;
+  }
+}
+
+.ecode-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.ecode-modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+}
+
+.ecode-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+}
+
+.ecode-close-button:hover {
+  color: #000;
+}
+
+.ecode-modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.ecode-modal-content input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #ff4d4d;
+  background-color: #fff0f0;
+}
+
+.ecode-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.ecode-actions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.validate-btn {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  min-width: 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validate-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.validate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+.spinner-btn {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

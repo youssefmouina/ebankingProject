@@ -1,0 +1,76 @@
+# ===================================
+# Java / Maven (Spring Boot backend)
+# ===================================
+# Ne pas ignorer le wrapper Maven JAR
+!.mvn/wrapper/maven-wrapper.jar
+# Exclure les builds générés, sauf si besoin spécifique
+**/target/
+**/build/
+
+# Exemples de patterns “!**/src/main/**/target/” dans certains projets
+# si tu veux explicitement inclure des targets sous src ; adapte selon besoins
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Fichiers de configuration / logs générés
+*.log
+
+# ===================================
+# Node / Angular (frontends)
+# ===================================
+# dépendances
+**/node_modules/
+# builds Angular
+**/dist/
+**/out-tsc/
+# caches
+**/.angular/cache
+# logs npm/yarn
+npm-debug.log*
+yarn-error.log*
+
+# ===================================
+# IDEs & éditeurs
+# ===================================
+# IntelliJ IDEA
+**/.idea/
+*.iws
+*.iml
+*.ipr
+# Eclipse
+**/.classpath
+**/.project
+**/.settings/
+**/.factorypath
+**/.springBeans
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/    # si NetBeans génère un dist/, mais Angular a déjà dist/ ignoré
+**/.nb-gradle/
+# VS Code
+**/.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ===================================
+# Systèmes & divers
+# ===================================
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+# logs divers
+
+# ===================================
+# Autres (optionnel)
+# ===================================
+# fichiers temporaires, caches divers
+**/.sass-cache/
+**/coverage/
+**/testem.log
+**/connect.lock
+**/libpeerconnection.log
+**/typings/

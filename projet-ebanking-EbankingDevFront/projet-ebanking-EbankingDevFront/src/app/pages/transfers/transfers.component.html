@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <div class="custom-card">
+    <div class="card-header bg-warning text-dark">
+      <h4 class="mb-0">{{ 'TRANSFER.TITLE' | translate }}</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="transfer" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="fromAccount" class="form-label">{{ 'TRANSFER.FROM_ACCOUNT' | translate }}</label>
+          <select id="fromAccount" class="form-select" formControlName="compteEmetteur">
+            <option value="" disabled>{{ 'TRANSFER.CHOOSE_ACCOUNT' | translate }}</option>
+            <ng-container *ngFor="let item of fromComptes">
+              <option [value]="item.rib">{{ item.rib }}</option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="toAccount" class="form-label">{{ 'TRANSFER.TO_ACCOUNT' | translate }}</label>
+          <input type="text" id="toAccount" class="form-control" placeholder="{{ 'TRANSFER.TO_ACCOUNT_PLACEHOLDER' | translate }}" formControlName="compteRecepteur">
+        </div>
+
+        <div class="mb-3">
+          <label for="amount" class="form-label">{{ 'TRANSFER.AMOUNT' | translate }}</label>
+          <input type="number" id="amount" class="form-control" placeholder="{{ 'TRANSFER.AMOUNT_PLACEHOLDER' | translate }}" formControlName="montant">
+        </div>
+
+        <div class="mb-3">
+          <label for="typeTransaction" class="form-label">{{ 'TRANSFER.TYPE_TRANSACTION' | translate }}</label>
+          <select id="typeTransaction" class="form-select" formControlName="type">
+            <option value="INSTANTANEE" [selected]="true">{{ 'TRANSFER.TYPE_INSTANT' | translate }}</option>
+            <option value="NORMAL">{{ 'TRANSFER.TYPE_NORMAL' | translate }}</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="!isFormReady" class="btn btn-primary">{{ 'TRANSFER.TRANSFER_BUTTON' | translate }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3 text-center" *ngIf="idVirement">
+  <button class="btn btn-outline-success" (click)="viewReceipt()">{{ 'TRANSFER.VIEW_RECEIPT' | translate }}</button>
+</div>
+
+<div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="receiptModalLabel">{{ 'TRANSFER.RECEIPT' | translate }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" attr.aria-label="{{ 'TRANSFER.CLOSE' | translate }}"></button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe
+          *ngIf="pdfUrl"
+          [src]="pdfUrl"
+          width="100%"
+          height="600px"
+          style="border: none;"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>

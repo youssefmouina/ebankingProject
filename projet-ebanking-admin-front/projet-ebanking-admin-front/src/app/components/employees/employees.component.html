@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">{{ 'employeecomp.title' | translate }}</h4>
+    <button class="operation-btn" (click)="openAddModal()">
+      {{ 'employeecomp.addAdminBtn' | translate }}
+    </button>
+  </div>
+
+  <div class="table-responsive custom-card">
+    <table class="table table-hover mb-0">
+      <thead class="thead-light">
+      <tr>
+        <th>{{ 'employeecomp.table.id' | translate }}</th>
+        <th>{{ 'employeecomp.table.lastName' | translate }}</th>
+        <th>{{ 'employeecomp.table.firstName' | translate }}</th>
+        <th>{{ 'employeecomp.table.email' | translate }}</th>
+        <th>{{ 'employeecomp.table.phone' | translate }}</th>
+        <th>{{ 'employeecomp.table.role' | translate }}</th>
+        <th>{{ 'employeecomp.table.createdAt' | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let e of employees">
+        <td>{{ e.id }}</td>
+        <td>{{ e.lastName }}</td>
+        <td>{{ e.firstName }}</td>
+        <td>{{ e.email }}</td>
+        <td>{{ e.phone }}</td>
+        <td>
+            <span class="badge text-white"
+                  [ngClass]="{
+                'bg-danger': e.role === Role.ADMIN,
+                'bg-primary': e.role === Role.AGENT,
+                'bg-success': e.role === Role.SUPER_ADMIN,
+                'bg-secondary': e.role !== Role.ADMIN && e.role !== Role.AGENT && e.role !== Role.SUPER_ADMIN
+              }">
+              {{ e.role }}
+            </span>
+        </td>
+        <td>{{ e.createdAt | date:'medium' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container mt-3">
+    <nav>
+      <ul class="pagination pagination-sm">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="previousPage()">
+            {{ 'employeecomp.pagination.previous' | translate }}
+          </a>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">
+            {{ 'employeecomp.pagination.page' | translate }} {{ currentPage + 1 }}
+          </span>
+        </li>
+        <li class="page-item" [class.disabled]="!hasMore">
+          <a class="page-link" (click)="nextPage()">
+            {{ 'employeecomp.pagination.next' | translate }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Modale ajout admin -->
+<app-add-employee-modal *ngIf="showAddModal" (close)="closeAddModal()"></app-add-employee-modal>

@@ -1,0 +1,199 @@
+/* Import Google Fonts (à mettre dans ton index.html ou Angular styles global) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&family=Merriweather&display=swap');
+
+/* Appliquer la police globalement */
+body, .container, .custom-card {
+  font-family: 'Poppins', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Tu peux changer Poppins par Roboto ou Merriweather si tu préfères */
+  font-weight: 400;
+  color: #333;
+}
+/* Container styling */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Base card style */
+
+.custom-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.custom-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated gradient headers */
+.card-header {
+  position: relative;
+  color: white;
+  font-weight: bold;
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+  padding: 15px;
+  font-size: 1.25rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Different gradient colors per status */
+.ACTIF-card .card-header {
+  background-image: linear-gradient(45deg, #28a745, #1e7e34, #20c997);
+}
+
+.BLOQUE-card .card-header {
+  background-image: linear-gradient(45deg, #6c757d, #5a6268, #adb5bd);
+}
+
+.FERME-card .card-header {
+  background-image: linear-gradient(45deg, #dc3545, #c82333, #e55353);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card body styling */
+.card-body {
+  background-color: #fdfdfd;
+  padding: 20px;
+  font-size: 0.95rem;
+}
+
+/* Table row hover effect */
+.table tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  transition: background-color 0.3s ease;
+}
+.account-card {
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  border-left: 4px solid #0d6efd;
+}
+
+.account-card:hover {
+  background-color: #e9f3ff;
+  border-color: #0d6efd;
+  transform: scale(1.01);
+}
+
+.selected-account {
+  border-color: #198754 !important;
+  background-color: #d1e7dd !important;
+  border-left: 4px solid #198754;
+}
+
+/* RIB column styling */
+td:first-child {
+  font-weight: bold;
+  color: #343a40;
+}
+.selected-row {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+.account-type-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.account-type-badge.COURANT {
+  background-color: #0d6efd; /* Bootstrap primary */
+}
+
+.account-type-badge.EPARGNE {
+  background-color: #ffc107; /* Bootstrap warning */
+  color: #212529; /* dark text for contrast */
+}
+.operation-btn {
+  flex: 1 1 auto;
+  background: linear-gradient(45deg, #e6d3a3, #d4af37, #c5a300); /* gold gradient */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  padding: 0.75rem 1rem;
+  margin-right: 0.5rem;
+}
+
+.operation-btn:last-child {
+  margin-right: 0;
+}
+
+.operation-btn.active {
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.4);
+  background: linear-gradient(45deg, #ffeb8a, #f5c842);
+  color: #1e1e1e;
+}
+.operation-card-body {
+  min-height: 200px; /* Adjust as needed for your data/table size */
+  position: relative;
+  padding-bottom: 60px; /* Ensure space for pagination */
+}
+
+.pagination-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .card-header {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .table td {
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 576px) { /* petits écrans */
+  .modal-body {
+    padding-bottom: 100%; /* ratio 1:1 */
+  }
+}
+
+@media (min-width: 577px) {
+  .modal-body {
+    padding-bottom: 75%; /* ratio 4:3 */
+  }
+}
+.enable-toggle {
+  width: 2.5rem;
+  height: 1.4rem;
+  background-color: #ddd;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+.enable-toggle:checked {
+  background-color: #28a745;
+}
+
+

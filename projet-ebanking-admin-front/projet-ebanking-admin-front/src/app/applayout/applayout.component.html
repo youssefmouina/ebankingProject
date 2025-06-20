@@ -1,0 +1,36 @@
+<div class="layout d-flex min-vh-100">
+  <!-- Sidebar -->
+  <aside class="sidebar bg-primary text-white d-flex flex-column p-3">
+    <!-- Logo -->
+    <div class="mb-4">
+      <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
+        <img src="assets/logo/logoBankino.png" alt="Logo" class="app-logo" />
+      </a>
+    </div>
+
+    <!-- Language Selector -->
+    <!-- Language Selector -->
+    <div class="language-selector d-flex align-items-center mb-4">
+      <i class="bi bi-globe me-2 fs-5"></i>
+      <select class="form-select form-select-sm w-auto" (change)="switchLang($event)">
+        <option value="en" [selected]="localStorage.getItem('lang') === 'en'">English</option>
+        <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">Français</option>
+      </select>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column">
+      <a class="nav-link text-white" routerLink="/dashboard" routerLinkActive="active">{{ 'navDASHBOARD' | translate }}</a>
+      <a class="nav-link text-white" routerLink="/employees" routerLinkActive="active">{{ 'navEMPLOYEES' | translate }}</a>
+      <a class="nav-link text-white" routerLink="/clients" routerLinkActive="active">{{ 'navCLIENTS' | translate }}</a>
+      <a class="nav-link text-white" routerLink="/transfers" routerLinkActive="active">{{ 'navTRANSFERS' | translate }}</a>
+      <a class="nav-link text-white" (click)="logout()">{{ 'LOGOUT' | translate }}</a>
+    </nav>
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content flex-grow-1 bg-light p-4">
+    <router-outlet></router-outlet>
+  </main>
+</div>

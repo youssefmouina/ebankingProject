@@ -1,0 +1,85 @@
+<div class="app-container d-flex flex-column min-vh-100">
+  <!-- Header -->
+  <div class="app-container d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header class="app-header bg-primary text-white">
+      <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">
+        <!-- Logo -->
+        <a class="navbar-brand" routerLink="/dashboard">
+          <img src="assets/logo/logoBankino.png" alt="Logo" class="app-logo" />
+        </a>
+
+        <!-- Toggler Button (Hamburger) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <!-- Navigation Links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/dashboard">{{ 'navDashboard' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/accounts">{{ 'navAccounts' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/payments">{{ 'navPaiments' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/transfers">{{ 'navTransfers' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/crypto">{{ 'navCrypto' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" routerLink="/login" (click)="logout()">{{ 'navLogout' | translate }}</a>
+            </li>
+          </ul>
+
+          <!-- Language Selector -->
+          <select class="form-select w-auto" (change)="switchLang($event)">
+            <option value="en" [selected]="localStorage.getItem('lang') === 'en'">EN</option>
+            <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">FR</option>
+          </select>
+
+          <ul class="navbar-nav ms-3">
+            <li class="nav-item dropdown profile-dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarDropdownProfile">
+                <i class="bi bi-person-circle me-2"></i>
+                <span class="d-none d-md-inline">{{ username }}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm" aria-labelledby="navbarDropdownProfile">
+                <li>
+                  <a class="dropdown-item" routerLink="/settings">
+                    <i class="bi bi-person me-2"></i> {{ 'navSettings' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" (click)="logout()">
+                    <i class="bi bi-box-arrow-right me-2"></i> {{ 'navLogout' | translate }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+      </nav>
+    </header>
+
+    <main class="app-main flex-grow-1 p-4 bg-light">
+      <router-outlet></router-outlet>
+      <chatbot></chatbot>
+      <!--<app-chatbot></app-chatbot>-->
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer bg-secondary text-white text-center py-2">
+      {{ 'footerText' | translate }}
+    </footer>
+  </div>
+
+</div>

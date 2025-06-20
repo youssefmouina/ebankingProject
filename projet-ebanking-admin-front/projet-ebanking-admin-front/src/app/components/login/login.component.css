@@ -1,0 +1,29 @@
+.btn-primary {
+  background: linear-gradient(45deg, #e6d3a3, #d4af37, #c5a300);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+  border-radius: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.625rem 1.5rem;
+  user-select: none;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(45deg, #ffeb8a, #f5c842);
+  color: #1e1e1e;
+  box-shadow: 0 6px 20px rgba(245, 200, 66, 0.7);
+  transform: translateY(-2px) scale(1.05);
+  outline: none;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+}

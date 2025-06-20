@@ -1,0 +1,66 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">{{ 'transfers.title' | translate }}</h4>
+    <button class="operation-btn" (click)="openVirementModal()">
+      {{ 'transfers.makeTransfer' | translate }}
+    </button>
+  </div>
+
+  <div class="table-responsive custom-card">
+    <table class="table table-hover mb-0">
+      <thead class="thead-light">
+      <tr>
+        <th>{{ 'transfers.id' | translate }}</th>
+        <th>{{ 'transfers.sender' | translate }}</th>
+        <th>{{ 'transfers.receiver' | translate }}</th>
+        <th>{{ 'transfers.amount' | translate }}</th>
+        <th>{{ 'transfers.date' | translate }}</th>
+        <th>{{ 'transfers.type' | translate }}</th>
+        <th>{{ 'transfers.receipt' | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let v of virements">
+        <td>{{ v.id }}</td>
+        <td>{{ v.compteEmetteur.rib }}</td>
+        <td>{{ v.compteRecepteur.rib }}</td>
+        <td class="text-success fw-semibold">{{ v.montant | number:'1.2-2' }}</td>
+        <td>{{ v.createdAt | date:'medium' }}</td>
+        <td>
+          <span class="badge"
+                [ngClass]="{
+                  'bg-success': v.type === TypeTransaction.INSTANTANEE,
+                  'bg-primary': v.type === TypeTransaction.NORMAL
+                }">
+            {{ v.type === TypeTransaction.INSTANTANEE ? ('transfers.instant' | translate) : ('transfers.normal' | translate) }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary" (click)="openRecuModal(v.id)">
+            {{ 'transfers.receipt' | translate }}
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container">
+    <nav>
+      <ul class="pagination pagination-sm">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="previousPage()">{{ 'transfers.prev' | translate }}</a>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">{{ 'transfers.page' | translate }} {{ currentPage + 1 }}</span>
+        </li>
+        <li class="page-item" [class.disabled]="!hasMore">
+          <a class="page-link" (click)="nextPage()">{{ 'transfers.next' | translate }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<app-virement-modal *ngIf="showVirementModal" (close)="closeVirementModal()"></app-virement-modal>
+<app-recu-modal *ngIf="selectedRecuId" [virementId]="selectedRecuId" (close)="closeRecuModal()"></app-recu-modal>

@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  height: 80vh;  /* Take available height */
+  width: 100%;   /* Take available width */
+  position: relative;  /* Relative, not fixed */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  /* Prevent inner scrollbars */
+  background: white;
+}
+
+.tradingview-widget-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.tradingview-widget-container__widget {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+.tradingview-widget-copyright {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10; /* Lowered unless you specifically need high stacking */
+  font-size: 11px;
+}
+
+.tradingview-widget-copyright a {
+  text-decoration: none;
+  color: #2962FF;
+}
+
+.blue-text {
+  color: #2962FF;
+}

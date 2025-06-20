@@ -1,0 +1,154 @@
+  {
+    "navDASHBOARD": "Dashboard",
+    "navCLIENTS": "Clients",
+    "navTRANSFERS": "Transfers",
+    "navDEPOSITS": "Deposits",
+    "LOGOUT": "Logout",
+    "navLANGUAGE": "Language",
+    "stats": {
+      "totalAccounts": "Total Accounts",
+      "totalBalance": "Total Balance",
+      "averageBalance": "Average Balance",
+      "newThisMonth": "New This Month",
+      "showLastMonths": "Show:",
+      "lastXMonths": "Last {{count}} months",
+      "openedPerMonth": "Accounts Opened Per Month",
+      "balanceDistribution": "Balance Distribution"
+    },
+    "dashboard": {
+      "title": "Bank Dashboard",
+      "totalClients": "Total Clients",
+      "currentAccounts": "Current Accounts",
+      "savingsAccounts": "Savings Accounts",
+      "loading": "Loading..."
+    },
+    "clientRegistrations": {
+      "title": "Client Registrations",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "month_plural": "months",
+      "month": "month",
+      "year_plural": "years",
+      "year": "year",
+      "lastPeriods": "Last {{count}} {{period}}"
+    },
+    "savingsAccountStatistics": "Savings Account Statistics",
+    "filter": {
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "lastNMonths": "Last {{count}} months",
+      "lastNYears": "Last {{count}} years"
+    },
+    "statsSAVING": {
+      "averageDeposit": "Average Deposit",
+      "monthlyGrowth": "Monthly Growth",
+      "newAccounts": "New Accounts"
+    },
+    "transfers": {
+      "title": "Transfer History",
+      "makeTransfer": "Make a Transfer",
+      "id": "ID",
+      "sender": "Sender",
+      "receiver": "Receiver",
+      "amount": "Amount (MAD)",
+      "date": "Date",
+      "type": "Type",
+      "receipt": "Receipt",
+      "instant": "Instant",
+      "normal": "Normal",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page"
+    },
+    "transferModal": {
+      "title": "Make a Transfer",
+      "senderRIB": "Sender's RIB",
+      "receiverRIB": "Beneficiary's RIB",
+      "amount": "Amount (MAD)",
+      "type": "Transfer Type",
+      "normal": "Normal",
+      "instant": "Instant",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "senderRIBError": "RIB must contain exactly 24 digits.",
+      "receiverRIBError": "RIB must contain exactly 24 digits.",
+      "amountError": "Amount must be a positive number."
+    },
+    "receiptModal": {
+      "title": "Transfer Receipt #{{id}}",
+      "loading": "Loading receipt...",
+      "error": "An error occurred while loading the receipt.",
+      "close": "Close"
+    },
+    "CLIENT_LIST": "Client List",
+    "ID": "ID",
+    "FULL_NAME": "Full Name",
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "JOB": "Job",
+    "VALID": "Valid",
+    "ACTIONS": "Actions",
+    "VALIDATE": "Validate",
+    "MODIFY": "Modify",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "YES": "Yes",
+    "NO": "No",
+    "navEMPLOYEES": "Employees",
+    "unauthorized": {
+      "title": "Unauthorized Access",
+      "message": "You are not authorized to view this page.",
+      "contact": "Please contact your administrator if you believe this is a mistake."
+    },
+    "TRANSFER": {
+      "SUCCESS_TITLE": "Transfer Completed",
+      "SUCCESS_TEXT": "The transfer was successful.",
+      "ERROR_TEXT": "An error occurred during the transfer.",
+      "CONFIRM_BUTTON": "Close"
+    },
+    "employee": {
+      "addSuccess": "Administrator successfully added!",
+      "addTitle": "Success",
+      "addErrorTitle": "Error",
+      "addErrorMessage": "Error while adding the administrator."
+    },
+    "addEmp": {
+      "ADD_ADMIN": "Add Administrator",
+      "CLOSE": "Close",
+      "LAST_NAME": "Last Name",
+      "LAST_NAME_REQUIRED": "Last name is required.",
+      "FIRST_NAME": "First Name",
+      "FIRST_NAME_REQUIRED": "First name is required.",
+      "EMAIL": "Email",
+      "EMAIL_VALID": "A valid email is required.",
+      "PASSWORD": "Password",
+      "PASSWORD_REQUIRED": "Password is required (min. 6 characters).",
+      "PHONE": "Phone",
+      "PHONE_VALID": "A valid phone number is required.",
+      "ROLE": "Role",
+      "SELECT_ROLE": "-- Select a role --",
+      "ROLE_REQUIRED": "Role is required.",
+      "CANCEL": "Cancel",
+      "ADDING": "Adding...",
+      "ADD": "Add"
+    },
+    "employeecomp": {
+      "title": "Employees List",
+      "addAdminBtn": "Add Administrator",
+      "table": {
+        "id": "ID",
+        "lastName": "Last Name",
+        "firstName": "First Name",
+        "email": "Email",
+        "phone": "Phone",
+        "role": "Role",
+        "createdAt": "Created At"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "page": "Page",
+        "next": "Next"
+      }
+    }
+  }

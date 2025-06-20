@@ -1,0 +1,115 @@
+<!-- MODALE POUR CHANGER L'eCODE -->
+<div *ngIf="display" class="ecode-modal-overlay">
+  <div class="ecode-modal-content">
+    <button class="ecode-close-button" (click)="cancel()">×</button>
+    <h3>Enter your eCode</h3>
+    <p>
+      Bankinho E-code est nécessaire pour la confirmation de vos opérations, c'est un code personnel,
+      ne le communiquez à personne.
+    </p>
+
+    <form (ngSubmit)="validate()">
+      <input
+        name="ecode"
+        [(ngModel)]="ecode"
+        type="password"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="4"
+        minlength="4"
+        placeholder="Enter your e-code"
+        required
+        (keypress)="allowOnlyNumbers($event)"
+        (ngModelChange)="onEcodeChange()"
+      />
+
+    
+
+      <input
+        name="confirmEcode"
+        [(ngModel)]="confirmEcode"
+        type="password"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="4"
+        minlength="4"
+        placeholder="Confirm your e-code"
+        required
+        (keypress)="allowOnlyNumbers($event)"
+      />
+
+      <div *ngIf="ecode && confirmEcode && ecode !== confirmEcode" class="inline-error">
+        Les codes ne correspondent pas.
+      </div>
+
+      <div *ngIf="ecodeNotSecure" class="error-message">
+        {{ ecodeNotSecure }}
+      </div>
+
+      <div class="ecode-actions">
+        <button type="submit" class="validate-btn" [disabled]="!ecode || ecode !== confirmEcode || isLoading">
+          <ng-container *ngIf="!isLoading; else loadingTpl">Validate</ng-container>
+          <ng-template #loadingTpl>
+            <span class="spinner-btn"></span> Processing...
+          </ng-template>
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE POUR VERIFICATION PAR EMAIL -->
+<div *ngIf="generateVerificationCodeModal" class="ecode-modal-overlay">
+  <div class="ecode-modal-content">
+    <button class="ecode-close-button" (click)="cancel()">×</button>
+    <h3>Enter verification code</h3>
+    <p>Un code de vérification a été envoyé à votre adresse e-mail. Veuillez le saisir ci-dessous :</p>
+
+    <form (ngSubmit)="verifyEmailCode()">
+      <div class="ecode-digit-container">
+        <input
+          *ngFor="let digit of codeDigits; let i = index"
+          #codeInput
+          type="text"
+          maxlength="1"
+          pattern="[0-9]*"
+          class="ecode-digit-input"
+          [(ngModel)]="verificationCodeDigits[i]"
+          name="code{{i}}"
+          (input)="onDigitInput($event, i)"
+          (keydown)="onKeyDown($event, i)"
+          (paste)="i === 0 ? handlePaste($event) : null"
+        />
+      </div>
+
+
+      <div *ngIf="verificationCode && invalidTokenError" class="inline-error">
+        {{ invalidTokenError }}
+      </div>
+
+      <div class="ecode-actions">
+        <button type="submit" class="validate-btn">Verify</button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE SUCCÈS -->
+<div class="success-modal-overlay" *ngIf="showSuccessModal">
+  <div class="success-modal-content">
+    <button class="success-close-button" (click)="closeSuccessModal()">×</button>
+    <h2>Succès !</h2>
+    <p>Votre eCode a été modifié avec succès. Veuillez l'utiliser pour vos prochaines opérations.</p>
+  </div>
+</div>
+
+<!-- MODALE ÉCHEC -->
+<div class="failure-modal-overlay" *ngIf="showFailureModal">
+  <div class="failure-modal-content">
+    <button class="failure-close-button" (click)="closeFailureModal()">×</button>
+    <h2>Échec de la mise à jour</h2>
+    <p>{{errorMessage}}</p>
+  </div>
+</div>

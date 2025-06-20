@@ -1,0 +1,29 @@
+<div class="recharge-container">
+  <div class="recharge-tabs">
+    <button class="tab-button" [class.active]="activeTab === 'recharges'" (click)="activeTab = 'recharges'">
+      <i class="bi bi-phone-fill me-2"></i> {{ 'PAYMENT.PHONE_RECHARGE' | translate }}
+    </button>
+    <button class="tab-button" [class.active]="activeTab === 'invoices'" (click)="activeTab = 'invoices'">
+      <i class="bi bi-receipt me-2"></i> {{ 'PAYMENT.INVOICES' | translate }}
+    </button>
+  </div>
+
+  <div class="recharge-content mt-4">
+    <!-- Onglet Recharges -->
+    <div *ngIf="activeTab === 'recharges'">
+      <recharge></recharge>
+    </div>
+
+    <!-- Onglet Factures -->
+    <div *ngIf="activeTab === 'invoices'">
+      <invoices></invoices>
+    </div>
+  </div>
+</div>
+<!--<div class="button-container">
+  <button class="recharges-button" routerLink="recharges">{{ 'PAYMENT.PHONE_RECHARGE' | translate }}</button>
+  <button class="invoices-button" routerLink="invoices">{{ 'PAYMENT.INVOICES' | translate }}</button>
+</div>
+
+<router-outlet></router-outlet>
+-->

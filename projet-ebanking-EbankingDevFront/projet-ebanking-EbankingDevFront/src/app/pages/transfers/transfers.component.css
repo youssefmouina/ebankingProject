@@ -1,0 +1,162 @@
+/* Import Google Fonts (à mettre dans ton index.html ou Angular styles global) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&family=Merriweather&display=swap');
+
+/* Appliquer la police globalement */
+body, .container, .custom-card {
+  font-family: 'Poppins', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Tu peux changer Poppins par Roboto ou Merriweather si tu préfères */
+  font-weight: 400;
+  color: #333;
+}
+
+
+/* Base card style */
+.custom-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.custom-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated gradient headers */
+.custom-card > .card-header {
+  position: relative;
+  color: white;
+  font-weight: bold;
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+  padding: 15px;
+  font-size: 1.25rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-image: linear-gradient(45deg, #ffc107, #ffca2c, #ffdf5f); /* warm golden gradient */
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card body styling */
+.custom-card > .card-body {
+  background-color: #fdfdfd;
+  padding: 20px;
+  font-size: 0.95rem;
+}
+
+/* Form labels and inputs */
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-select,
+.form-control {
+  border-radius: 12px;
+  border: 1.5px solid #ced4da;
+  padding: 10px 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-select:focus,
+.form-control:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+  outline: none;
+}
+
+/* Submit button */
+button[type="submit"].btn-primary {
+  background: linear-gradient(45deg, #e6d3a3, #d4af37, #c5a300);
+  border: none;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 12px;
+  transition: background 0.4s ease;
+}
+
+button[type="submit"].btn-primary:disabled {
+  background: #f0e6b9;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+button[type="submit"].btn-primary:not(:disabled):hover {
+  background: linear-gradient(45deg, #ffeb8a, #f5c842);
+  color: #1e1e1e;
+}
+
+/* Receipt button */
+.mt-3.text-center > .btn-outline-success {
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: 2px solid #198754;
+  color: #198754;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 2px 6px rgba(25, 135, 84, 0.2);
+}
+
+.mt-3.text-center > .btn-outline-success:hover {
+  background: #198754;
+  color: white;
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.6);
+}
+
+/* Modal styles */
+.modal-content {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  border-bottom: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal-header.bg-primary {
+  background: linear-gradient(45deg, #ffc107, #ffca2c, #ffdf5f);
+  color: #1e1e1e;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .custom-card > .card-header {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .form-label, .form-control, .form-select {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-body {
+    padding-bottom: 100%; /* square ratio on small screens */
+  }
+}
+
+@media (min-width: 577px) {
+  .modal-body {
+    padding-bottom: 75%; /* 4:3 ratio */
+  }
+}

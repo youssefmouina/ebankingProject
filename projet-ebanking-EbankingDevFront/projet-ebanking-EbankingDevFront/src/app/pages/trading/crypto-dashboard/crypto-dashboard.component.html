@@ -1,0 +1,105 @@
+<ng-container *ngFor="let crypto of cryptoData; let i = index; trackBy: trackBySymbol">
+  <div class="crypto-row" *ngIf="i % 2 === 0">
+    <!-- Première carte -->
+    <div class="card-container" *ngIf="value && cryptoData[i] as crypto1">
+      <div class="crypto-card">
+        <div class="card-header">
+          <h3>{{ crypto1.symbol }}</h3>
+          <img *ngIf="crypto1.logoUrl" [src]="crypto1.logoUrl" alt="{{ crypto1.symbol }}" class="crypto-logo">
+        </div>
+        <div class="card-content">
+          <p><strong>Prix :</strong> {{ crypto1.currentPrice || crypto1.price || 'N/A' }} $</p>
+          <p>
+            <strong>Changement 24h :</strong>
+            <span [class.positive]="isPositive(crypto1.change)" [class.negative]="!isPositive(crypto1.change)">
+              {{ crypto1.change || 'N/A' }} $ ({{ crypto1.percent || 'N/A' }} %)
+            </span>
+          </p>
+          <p><strong>Volume 24h :</strong> {{ crypto1.volume || 'N/A' }}</p>
+          <p *ngIf="crypto1.high24h"><strong>Plus haut 24h :</strong> {{ crypto1.high24h }} $</p>
+          <p *ngIf="crypto1.low24h"><strong>Plus bas 24h :</strong> {{ crypto1.low24h }} $</p>
+          <p *ngIf="crypto1.lowestPriceMonth"><strong>Plus bas 1 mois :</strong> {{ crypto1.lowestPriceMonth }} $</p>
+          <p *ngIf="crypto1.lowestPriceYear"><strong>Plus bas 1 an :</strong> {{ crypto1.lowestPriceYear }} $</p>
+          <p *ngIf="crypto1.roiMonth"><strong>ROI 1 mois :</strong> {{ crypto1.roiMonth }} %</p>
+          <p *ngIf="crypto1.roiYear"><strong>ROI 1 an :</strong> {{ crypto1.roiYear }} %</p>
+          <p *ngIf="crypto1.openPrice"><strong>Prix ouverture 24h :</strong> {{ crypto1.openPrice }} $</p>
+          <p *ngIf="crypto1.quoteVolume"><strong>Volume en cotation :</strong> {{ crypto1.quoteVolume }}</p>
+          <p *ngIf="crypto1.marketCap"><strong>Capitalisation :</strong> {{ crypto1.marketCap }} $</p>
+          <p *ngIf="crypto1.rank"><strong>Rang :</strong> #{{ crypto1.rank }}</p>
+          <p *ngIf="crypto1.circulatingSupply"><strong>Offre circulation :</strong> {{ crypto1.circulatingSupply }}</p>
+          <p *ngIf="crypto1.totalVolume"><strong>Volume total :</strong> {{ crypto1.totalVolume }} $</p>
+          <p *ngIf="crypto1.ath"><strong>ATH :</strong> {{ crypto1.ath }} $</p>
+          <p *ngIf="crypto1.athDate"><strong>Date ATH :</strong> {{ crypto1.athDate }}</p>
+        </div>
+        <div class="card-actions">
+          <label for="compteId" class="form-label fw-bold">Btc</label>
+          <input type="number" min="0" placeholder="Montant" class="quantity-input"
+            [(ngModel)]="quantities[crypto1.symbol]" [attr.data-symbol]="crypto1.symbol">
+            <label for="compteId1" class="form-label fw-bold">Choisissez Votre Compte</label>
+            <select id="compteId1" class="form-select account-select" required (change)="onCompteChange($event)">
+              <option value="" disabled selected>-- Sélectionnez un compte --</option>
+              <option *ngFor="let compte of comptesCourants" [value]="compte.rib">
+                {{ compte.rib }}
+              </option>
+            </select>
+          <div class="button-group">
+            <button  class="buy-btn" (click)="buy(crypto1.symbol,crypto1.currentPrice|| crypto1.price||'0')">Acheter</button>
+            <button  class="sell-btn" (click)="sell(crypto1.symbol,crypto1.currentPrice|| crypto1.price||'0')">Vendre</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deuxième carte -->
+    <div class="card-container" *ngIf="!value&& cryptoData[i + 1] as crypto2">
+      <div class="crypto-card">
+        <div class="card-header">
+          <h3>{{ crypto2.symbol }}</h3>
+          <img *ngIf="crypto2.logoUrl" [src]="crypto2.logoUrl" alt="{{ crypto2.symbol }}" class="crypto-logo">
+        </div>
+        <div class="card-content">
+          <p><strong>Prix :</strong> {{ crypto2.currentPrice || crypto2.price || 'N/A' }} $</p>
+          <p>
+            <strong>Changement 24h :</strong>
+            <span [class.positive]="isPositive(crypto2.change)" [class.negative]="!isPositive(crypto2.change)">
+              {{ crypto2.change || 'N/A' }} $ ({{ crypto2.percent || 'N/A' }} %)
+            </span>
+          </p>
+          <p><strong>Volume 24h :</strong> {{ crypto2.volume || 'N/A' }}</p>
+          <p *ngIf="crypto2.high24h"><strong>Plus haut 24h :</strong> {{ crypto2.high24h }} $</p>
+          <p *ngIf="crypto2.low24h"><strong>Plus bas 24h :</strong> {{ crypto2.low24h }} $</p>
+          <p *ngIf="crypto2.lowestPriceMonth"><strong>Plus bas 1 mois :</strong> {{ crypto2.lowestPriceMonth }} $</p>
+          <p *ngIf="crypto2.lowestPriceYear"><strong>Plus bas 1 an :</strong> {{ crypto2.lowestPriceYear }} $</p>
+          <p *ngIf="crypto2.roiMonth"><strong>ROI 1 mois :</strong> {{ crypto2.roiMonth }} %</p>
+          <p *ngIf="crypto2.roiYear"><strong>ROI 1 an :</strong> {{ crypto2.roiYear }} %</p>
+          <p *ngIf="crypto2.openPrice"><strong>Prix ouverture 24h :</strong> {{ crypto2.openPrice }} $</p>
+          <p *ngIf="crypto2.quoteVolume"><strong>Volume en cotation :</strong> {{ crypto2.quoteVolume }}</p>
+          <p *ngIf="crypto2.marketCap"><strong>Capitalisation :</strong> {{ crypto2.marketCap }} $</p>
+          <p *ngIf="crypto2.rank"><strong>Rang :</strong> #{{ crypto2.rank }}</p>
+          <p *ngIf="crypto2.circulatingSupply"><strong>Offre circulation :</strong> {{ crypto2.circulatingSupply }}</p>
+          <p *ngIf="crypto2.totalVolume"><strong>Volume total :</strong> {{ crypto2.totalVolume }} $</p>
+          <p *ngIf="crypto2.ath"><strong>ATH :</strong> {{ crypto2.ath }} $</p>
+          <p *ngIf="crypto2.athDate"><strong>Date ATH :</strong> {{ crypto2.athDate }}</p>
+        </div>
+        <div class="card-actions">
+           <label for="compteId" class="form-label fw-bold">Eth</label>
+          <input type="number" min="0" placeholder="Montant" class="quantity-input"
+            [(ngModel)]="quantities[crypto2.symbol]">
+            <div class="mb-3">
+        <label for="compteId" class="form-label fw-bold">Choisissez Votre Compte</label>
+        <select id="compteId" class="form-select account-select" required (change)="onCompteChange($event)">
+          <option value="" disabled selected>-- Sélectionnez un compte --</option>
+          <option *ngFor="let compte of comptesCourants" [value]="compte.rib">
+            {{ compte.rib }}
+          </option>
+        </select>
+      </div>
+          <div class="button-group">
+            <button  class="buy-btn" (click)="buy(crypto2.symbol,crypto2.currentPrice|| crypto2.price||'0')">Acheter</button>
+            <button class="sell-btn" (click)="sell(crypto2.symbol,crypto2.currentPrice|| crypto2.price||'0')">Vendre</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
