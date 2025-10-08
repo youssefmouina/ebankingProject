@@ -165,7 +165,7 @@ public class Mail {
                     + "                <a href=\"link\" class=\"button\">Définir mon mot de passe</a>\r\n"
                     + "            </div>\r\n"
                     + "\r\n"
-                    + "            <p>Ce lien expirera dans 24 heures pour des raisons de sécurité. Si vous n'avez pas demandé à définir votre mot de passe, veuillez ignorer cet email.</p>\r\n"
+                    + "            <p>Ce lien expiirera dans 24 heures pour des raisons de sécurité. Si vous n'avez pas demandé à définir votre mot de passe, veuillez ignorer cet email.</p>\r\n"
                     + "\r\n"
                     + "            <div class=\"security-notice\">\r\n"
                     + "                <p><strong>🔒 Note de sécurité :</strong> Nous ne vous demanderons jamais votre token par email. Si vous recevez un tel message, ne cliquez pas sur les liens et contactez-nous immédiatement.</p>\r\n"
