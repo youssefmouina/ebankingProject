@@ -1,5 +1,5 @@
 agent {
-    label "jenkins-agent"
+    label any
 }
 
 stages {
