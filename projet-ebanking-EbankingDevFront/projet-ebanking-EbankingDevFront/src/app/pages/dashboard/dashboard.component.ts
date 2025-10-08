@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
             if (err.status === 401 || err.status === 403) {
               this.authService.logout();
             } else {
-              console.error('Error loading contents', err);
+              console.error('Eror loading contents', err);
               }
             }
           });
